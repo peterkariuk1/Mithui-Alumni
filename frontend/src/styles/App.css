@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Great+Vibes&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --primary-color: #fcfcf7;
+  --secondary-color: #134172;
+  --tertiary-color: #b73836;
+  --sec-2-color: #fcaa32;
+}
+body {
+  margin: 0;
+  font-family: "Roboto Condensed", serif;
+  background-color: var(--primary-color);
+}
+.landing-page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  width: 100vw;
+  background-image: url("../images/landing-page-photo.png");
+  background-repeat: none;
+  background-position: center;
+  background-size: cover;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  height: 70px;
+  left: 60px;
+  right: 60px;
+  top: 30px;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+  border-bottom: 1px solid #fcaa32;
+}
+header img {
+  width: 200px;
+  margin-top: -10px;
+}
+.left-header{
+    display: flex;
+    column-gap: 35px;
+    color: var(--primary-color);
+
+}
+.left-header .cta-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 28px 1px 28px;
+    /* height: 60px; */
+    border: 1.2px solid #fcfcf7;
+    border-radius: 15px;
+    color: #fcaa32;
+}
+.landing-page p {
+  text-align: center;
+  font-weight: 500;
+  font-size: 40px;
+  width: 60vw;
+  color: var(--primary-color);
+}
+.landing-page span {
+  color: var(--sec-2-color);
+  display: block;
+  font-family: "Great Vibes";
+}
+.purpose-container {
+  display: flex;
+  width: 80vw;
+  justify-self: center;
+  justify-content: space-around;
+  /* background-color: black; */
+  margin-top: 20px;
+}
+.purpose-container div div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px #0000003e;
+}
+.vision-container div {
+  background-color: var(--sec-2-color);
+}
+.mission-container div {
+  background-color: var(--secondary-color);
+}
+.objective-container div {
+  background-color: var(--tertiary-color);
+}
+.purpose-container div img {
+  width: 30px;
+}
+.vision-container,
+.mission-container,
+.objective-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.purpose-text h1 {
+  margin: 2px;
+  font-size: 16px;
+  text-align: center;
+}
+.purpose-text p {
+  margin: 2px;
+  font-size: 12px;
+  text-align: center;
+}
+.purpose-text span {
+  margin: 2px;
+  font-size: 15px;
+  text-align: center;
+  color: purple;
+  cursor: pointer;
+}
+.purpose-text {
+  /* margin-left: 20px; */
+  width: 200px;
+  text-align: center;
+}
