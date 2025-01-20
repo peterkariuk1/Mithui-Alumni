@@ -17,11 +17,21 @@ body {
   justify-content: center;
   align-items: center;
   height: 70vh;
-  width: 100vw;
+  max-width: 100vw;
   background-image: url("../images/landing-page-photo.png");
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+@keyframes headerLoad {
+  0% {
+    transform: translate3d(-14rem, -12rem, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
 header {
   display: flex;
@@ -34,27 +44,44 @@ header {
   top: 30px;
   z-index: 2;
   backdrop-filter: blur(5px);
+  background-color: #0000003e;
   border-bottom: 1px solid #fcaa32;
+  animation: 2.2s ease 1 normal headerLoad;
 }
 header img {
   width: 200px;
   margin-top: -10px;
 }
-.left-header{
-    display: flex;
-    column-gap: 35px;
-    color: var(--primary-color);
-
+.left-header {
+  display: flex;
+  margin-right: 23px;
+  column-gap: 25px;
+  color: var(--primary-color);
 }
-.left-header .cta-button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1px 28px 1px 28px;
-    /* height: 60px; */
-    border: 1.2px solid #fcfcf7;
-    border-radius: 15px;
-    color: #fcaa32;
+.left-header .cta-button {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  padding: 3px 20px 3px 20px;
+  /* height: 60px; */
+  border: 1.5px solid #fcfcf7;
+  border-radius: 20px;
+  color: #fcaa32;
+}
+.left-header .cta-button span {
+  margin: 8px 0px;
+}
+
+@keyframes opacityLoad {
+  0% {
+    transform: translate3d(0, -5.5rem, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0rem, 0);
+    opacity: 1;
+  }
 }
 .landing-page p {
   text-align: center;
@@ -62,19 +89,30 @@ header img {
   font-size: 40px;
   width: 60vw;
   color: var(--primary-color);
+  animation: 2s ease-in-out 1 normal opacityLoad;
 }
 .landing-page span {
   color: var(--sec-2-color);
   display: block;
   font-family: "Great Vibes";
 }
+@keyframes opacityPurposeLoad {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .purpose-container {
   display: flex;
   width: 80vw;
   justify-self: center;
   justify-content: space-around;
+  align-items: start;
   /* background-color: black; */
   margin-top: 20px;
+  animation: 5.2s ease 1 normal opacityPurposeLoad;
 }
 .purpose-container div div {
   display: flex;
@@ -83,6 +121,7 @@ header img {
   padding: 13px;
   border-radius: 10px;
   box-shadow: 0px 2px 4px #0000003e;
+  /* vertical-align: top; */
 }
 .vision-container div {
   background-color: var(--sec-2-color);
@@ -126,4 +165,86 @@ header img {
   /* margin-left: 20px; */
   width: 200px;
   text-align: center;
+}
+
+/* Media queries for rensponsiveness on the landing page */
+
+@media (max-width: 410px) {
+}
+
+@media (max-width: 700px) {
+  header img {
+    width: 140px;
+    margin-top: 3px;
+  }
+  .left-header .cta-button {
+    padding: 1px 22px 1px 22px;
+    font-size: 15px;
+  }
+  .left-header {
+    column-gap: 15px;
+  }
+  .landing-page p {
+    font-size: 36px;
+    padding-top: 78px;
+  }
+  .purpose-text h1 {
+    font-size: 14px;
+  }
+  .purpose-text p {
+    font-size: 10px;
+  }
+  .purpose-text span {
+    font-size: 13px;
+  }
+  .purpose-text {
+    width: 180px;
+  }
+}
+@media (max-width: 612px) {
+  header {
+    left: 35px;
+    right: 35px;
+  }
+}
+@media (max-width: 590px) {
+  header img {
+    width: 100px;
+    margin-top: 3px;
+    margin-left: -27px;
+  }
+  .left-header .cta-button {
+    padding: 1px 13px 1px 13px;
+    font-size: 13px;
+  }
+  .left-header {
+    column-gap: 8px;
+    font-size: 13px;
+  }
+  .landing-page p {
+    font-size: 30px;
+    margin-top: -20px;
+    width: 75vw;
+  }
+  .purpose-text h1 {
+    font-size: 14px;
+  }
+  .purpose-text p {
+    font-size: 10px;
+  }
+  .purpose-text span {
+    font-size: 13px;
+  }
+  .purpose-text {
+    width: 120px;
+  }
+}
+@media (max-width: 478px) {
+  header img {
+    width: 90px;
+  }
+  header {
+    left: 30px;
+    right: 30px;
+  }
 }

@@ -48,9 +48,8 @@ export function Landing() {
           <section className="purpose-text">
             <h1>Objective</h1>
             <p>
-              Foster seamless communication among alumni, enabling the free flow
-              of ideas and opportunities that drive personal growth and
-              community development
+              Enable the free flow of ideas and opportunities that drive
+              personal growth and community development
             </p>
             <span>Read more...</span>
           </section>

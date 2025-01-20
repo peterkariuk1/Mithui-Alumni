@@ -23,7 +23,10 @@ export function Header() {
           <p>Login</p>
         </div>
         <div className="cta-button">
-            Register
+          <span>
+          Register
+          </span>
+            
         </div>
       </div>
     </header>
