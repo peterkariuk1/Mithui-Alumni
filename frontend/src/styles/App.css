@@ -200,8 +200,8 @@ header img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
   }
   .menu-icon-container:hover {
@@ -294,7 +294,7 @@ header img {
     right: 35px;
   }
   .menu-items {
-    top: 70px;
+    top: 60px;
     right: -20px;
   }
   .menu-items div {
@@ -343,9 +343,14 @@ header img {
   }
   .menu-items {
     top: 50px;
-    right: -20px;
+    right: -40px;
   }
   .menu-items div {
     padding: 3px 55px 3px 8px;
+  }
+}
+@media (max-width: 360px){
+  .menu-items {
+    right: -60px;
   }
 }
