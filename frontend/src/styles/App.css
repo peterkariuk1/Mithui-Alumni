@@ -231,9 +231,6 @@ header img {
     color: #fcaa32;
     font-size: 13px;
   }
-  .menu-icon-container:hover .menu-items {
-    display: block;
-  }
   
   .menu-items {
     display: none;
@@ -241,12 +238,17 @@ header img {
     background-color: #fcfcf7d3;
     color: var(--secondary-color);
     border-radius: 20px;
-    top: 40px;
-    right: 10px;
+    top: 60px;
+    right: -30px;
     z-index: 3;
+    
   }
+  .menu-items.active{
+   display: block;
+   
+ }
   .menu-items div {
-    padding: 3px 65px 3px 8px;
+    padding: 3px 95px 3px 8px;
   }
   .menu-items div:hover {
     border-bottom: 1.3px solid #134172;
@@ -292,11 +294,11 @@ header img {
     right: 35px;
   }
   .menu-items {
-    top: 40px;
-    right: -10px;
+    top: 70px;
+    right: -20px;
   }
   .menu-items div {
-    padding: 3px 45px 3px 8px;
+    padding: 3px 75px 3px 8px;
   }
 }
 @media (max-width: 590px) {
@@ -340,10 +342,10 @@ header img {
     right: 30px;
   }
   .menu-items {
-    top: 40px;
+    top: 50px;
     right: -20px;
   }
   .menu-items div {
-    padding: 3px 45px 3px 8px;
+    padding: 3px 55px 3px 8px;
   }
 }
