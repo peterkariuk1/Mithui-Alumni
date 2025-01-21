@@ -20,13 +20,16 @@ export function Header() {
           <p>Events</p>
         </div>
         <div className="login">
+          <p>Results</p>
+        </div>
+        <div className="login">
+          <p>Projects</p>
+        </div>
+        <div className="login">
           <p>Login</p>
         </div>
         <div className="cta-button">
-          <span>
-          Register
-          </span>
-            
+          <span>Register</span>
         </div>
       </div>
     </header>
