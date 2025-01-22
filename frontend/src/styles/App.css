@@ -10,6 +10,7 @@ body {
   margin: 0;
   font-family: "Roboto Condensed", serif;
   background-color: var(--primary-color);
+  /* padding-bottom: 30px; */
 }
 .landing-page {
   position: relative;
@@ -125,6 +126,7 @@ header img {
   align-items: start;
   /* background-color: black; */
   margin-top: 20px;
+  margin-bottom: 40px;
   animation: 5.2s ease 1 normal opacityPurposeLoad;
 }
 .purpose-container div div {
@@ -200,8 +202,8 @@ header img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
   }
   .menu-icon-container:hover {
@@ -239,7 +241,7 @@ header img {
     color: var(--secondary-color);
     border-radius: 20px;
     top: 60px;
-    right: -30px;
+    right: -50px;
     z-index: 3;
     
   }
@@ -294,8 +296,8 @@ header img {
     right: 35px;
   }
   .menu-items {
-    top: 70px;
-    right: -20px;
+    top: 60px;
+    right: -40px;
   }
   .menu-items div {
     padding: 3px 75px 3px 8px;
@@ -343,9 +345,14 @@ header img {
   }
   .menu-items {
     top: 50px;
-    right: -20px;
+    right: -50px;
   }
   .menu-items div {
     padding: 3px 55px 3px 8px;
+  }
+}
+@media (max-width: 360px){
+  .menu-items {
+    right: -60px;
   }
 }
