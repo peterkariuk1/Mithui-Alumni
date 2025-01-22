@@ -6,7 +6,7 @@ export function News() {
         Stay updated—be the first to know about our milestones, events, and
         inspiring alumni stories
       </p>
-      <span>Read more...</span>
+      <span>Explore</span>
     </div>
   );
 }

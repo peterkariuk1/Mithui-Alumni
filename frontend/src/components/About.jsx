@@ -6,7 +6,7 @@ export function About() {
         Discover who we are, where we have been, and the vision that drives us
         forward.
       </p>
-      <span>Read more...</span>
+      <span>Explore</span>
     </div>
   );
 }
