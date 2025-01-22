@@ -6,3 +6,42 @@
   --tertiary-color: #b73836;
   --sec-2-color: #fcaa32;
 }
+.sections-container {
+  width: 95vw;
+  height: fit-content;
+  margin: auto;
+  /* background-color: #134172; */
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 25px;
+  row-gap: 38px;
+}
+.welcome-container {
+  background-image: url("../images/welc-container.png");
+  background-position: bottom;
+}
+.find-us-container {
+  background-image: url("../images/findus-cont.jpg");
+  background-position: top;
+}
+.about-container {
+  background-image: url("../images/about-container.jpg");
+  background-position: bottom;
+}
+.news-container {
+  background-image: url("../images/news-container.jpg");
+  background-position: bottom;
+}
+.welcome-container,
+.find-us-container,
+.news-container,
+.about-container {
+  background-size: cover;
+  display: flex;
+  width: 45vw;
+  height: 220px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #0000005b;
+  /* border: 2px solid green; */
+}
