@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-family: "Roboto Condensed", serif;
   background-color: var(--primary-color);
-  padding-bottom: 100px;
+  /* padding-bottom: 30px; */
 }
 .landing-page {
   position: relative;
@@ -241,7 +241,7 @@ header img {
     color: var(--secondary-color);
     border-radius: 20px;
     top: 60px;
-    right: -30px;
+    right: -50px;
     z-index: 3;
     
   }
@@ -297,7 +297,7 @@ header img {
   }
   .menu-items {
     top: 60px;
-    right: -20px;
+    right: -40px;
   }
   .menu-items div {
     padding: 3px 75px 3px 8px;
@@ -345,7 +345,7 @@ header img {
   }
   .menu-items {
     top: 50px;
-    right: -40px;
+    right: -50px;
   }
   .menu-items div {
     padding: 3px 55px 3px 8px;
