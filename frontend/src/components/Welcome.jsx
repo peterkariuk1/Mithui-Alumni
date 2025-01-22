@@ -7,7 +7,7 @@ export function Welcome() {
         Welcome to the Mithui Alumni Association website, where we connect,
         share ideas, and create success stories.
       </p>
-      <span>Read more...</span>
+      <span>Explore</span>
     </div>
   );
 }
