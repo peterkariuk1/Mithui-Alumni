@@ -108,7 +108,7 @@ footer .right img {
   color: var(--primary-color);
   position: absolute;
   font-size: 13px;
-  bottom: 0;
+  bottom: -12px;
   right: 40vw;
   text-align: center;
   font-weight: 200;
@@ -119,5 +119,9 @@ footer .right img {
   footer {
     display: flex;
     flex-direction: column;
+  }
+  .rights-text{
+    margin-left: 35vw;
+    /* width: 100%; */
   }
 }
