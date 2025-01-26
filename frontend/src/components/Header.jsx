@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "../images/header-logo.png";
 import menuIcon from "../images/menu-icon.svg";
@@ -14,36 +14,36 @@ export function Header() {
         <div onClick={toggleMenuList} className="menu-icon-container">
           <img src={menuIcon} />
           <div className={`menu-items ${isOpen ? "active" : ""}`}>
-            <Link className="about">
+            <Link to="/about" className="about">
               <p>About</p>
             </Link>
-            <div className="gallery">
+            <Link to="gallery" className="gallery">
               <p>Gallery</p>
-            </div>
-            <div className="news">
+            </Link>
+            <Link to="news" className="news">
               <p>News</p>
-            </div>
-            <div className="events">
+            </Link>
+            <Link to="events" className="events">
               <p>Events</p>
-            </div>
-            <div className="login">
+            </Link>
+            <Link to="results" className="login">
               <p>Results</p>
-            </div>
-            <div className="login">
+            </Link>
+            <Link to="projects" className="login">
               <p>Projects</p>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="mithiu-logo">
           <img src={logo} />
         </div>
         <div className="logins">
-          <div className="login">
+          <Link to="login" className="login">
             <p>Login</p>
-          </div>
-          <div className="cta-button">
+          </Link>
+          <Link to="register" className="cta-button">
             <span>Register</span>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="large-screens">
@@ -51,30 +51,30 @@ export function Header() {
           <img src={logo} />
         </div>
         <div className="left-header">
-          <Link to='/about' className="about">
+          <Link to="/about" className="about">
             <p>About</p>
           </Link>
-          <div className="gallery">
+          <Link to="gallery" className="gallery">
             <p>Gallery</p>
-          </div>
-          <div className="news">
+          </Link>
+          <Link to="news" className="news">
             <p>News</p>
-          </div>
-          <div className="events">
+          </Link>
+          <Link to="events" className="events">
             <p>Events</p>
-          </div>
-          <div className="login">
+          </Link>
+          <Link to="results" className="login">
             <p>Results</p>
-          </div>
-          <div className="login">
+          </Link>
+          <Link to="projects" className="login">
             <p>Projects</p>
-          </div>
-          <div className="login">
+          </Link>
+          <Link to="login" className="login">
             <p>Login</p>
-          </div>
-          <div className="cta-button">
+          </Link>
+          <Link to="register" className="cta-button">
             <span>Register</span>
-          </div>
+          </Link>
         </div>
       </div>
     </header>
