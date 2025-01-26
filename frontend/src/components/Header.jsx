@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import { useState } from "react";
 import logo from "../images/header-logo.png";
 import menuIcon from "../images/menu-icon.svg";
@@ -13,9 +14,9 @@ export function Header() {
         <div onClick={toggleMenuList} className="menu-icon-container">
           <img src={menuIcon} />
           <div className={`menu-items ${isOpen ? "active" : ""}`}>
-            <div className="about">
+            <Link className="about">
               <p>About</p>
-            </div>
+            </Link>
             <div className="gallery">
               <p>Gallery</p>
             </div>
@@ -50,9 +51,9 @@ export function Header() {
           <img src={logo} />
         </div>
         <div className="left-header">
-          <div className="about">
+          <Link to='/about' className="about">
             <p>About</p>
-          </div>
+          </Link>
           <div className="gallery">
             <p>Gallery</p>
           </div>

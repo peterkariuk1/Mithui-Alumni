@@ -38,7 +38,7 @@ body {
 header {
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   height: 70px;
   left: 60px;
   right: 60px;
