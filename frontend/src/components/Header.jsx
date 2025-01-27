@@ -14,68 +14,67 @@ export function Header() {
         <div onClick={toggleMenuList} className="menu-icon-container">
           <img src={menuIcon} />
           <div className={`menu-items ${isOpen ? "active" : ""}`}>
-            <div>
-              {" "}
-              <Link
-                style={{ textDecoration: "none" }}
-                to="/about"
-                className="about"
-              >
+            <Link
+              style={{ textDecoration: "none" }}
+              to="about"
+              className="about"
+            >
+              <div>
                 <p>About</p>
-              </Link>
-            </div>
-            <div>
-              <Link
-                style={{ textDecoration: "none" }}
-                to="gallery"
-                className="gallery"
-              >
+              </div>
+            </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="gallery"
+              className="gallery"
+            >
+              <div>
                 <p>Gallery</p>
-              </Link>
-            </div>
-            <div>
-              <Link
-                style={{ textDecoration: "none" }}
-                to="news"
-                className="news"
-              >
+              </div>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="news" className="news">
+              <div>
                 <p>News</p>
-              </Link>
-            </div>
-            <div>
-              <Link
-                style={{ textDecoration: "none" }}
-                to="events"
-                className="events"
-              >
+              </div>
+            </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="events"
+              className="events"
+            >
+              <div>
                 <p>Events</p>
-              </Link>
-            </div>
-            <div>
-              <Link
-                style={{ textDecoration: "none" }}
-                to="results"
-                className="login"
-              >
+              </div>
+            </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="results"
+              className="login"
+            >
+              <div>
                 <p>Results</p>
-              </Link>
-            </div>
-            <div>
-              <Link
-                style={{ textDecoration: "none" }}
-                to="projects"
-                className="login"
-              >
+              </div>
+            </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="projects"
+              className="login"
+            >
+              <div>
                 <p>Projects</p>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
         <div className="mithiu-logo">
           <img src={logo} />
         </div>
         <div className="logins">
-          <Link style={{ textDecoration: "none" }} to="login" className="login">
+          <Link
+            style={{ textDecoration: "none", color: "#fcfcf7" }}
+            to="login"
+            className="login"
+          >
             <p>Login</p>
           </Link>
           <Link
