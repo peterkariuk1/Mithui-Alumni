@@ -22,7 +22,7 @@ function App() {
             <>
               <Landing />
               <Sections />
-              <Footer />
+              
             </>
           }
         />
@@ -35,6 +35,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
