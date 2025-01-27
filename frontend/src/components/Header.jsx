@@ -14,34 +14,75 @@ export function Header() {
         <div onClick={toggleMenuList} className="menu-icon-container">
           <img src={menuIcon} />
           <div className={`menu-items ${isOpen ? "active" : ""}`}>
-            <Link to="/about" className="about">
-              <p>About</p>
-            </Link>
-            <Link to="gallery" className="gallery">
-              <p>Gallery</p>
-            </Link>
-            <Link to="news" className="news">
-              <p>News</p>
-            </Link>
-            <Link to="events" className="events">
-              <p>Events</p>
-            </Link>
-            <Link to="results" className="login">
-              <p>Results</p>
-            </Link>
-            <Link to="projects" className="login">
-              <p>Projects</p>
-            </Link>
+            <div>
+              {" "}
+              <Link
+                style={{ textDecoration: "none" }}
+                to="/about"
+                className="about"
+              >
+                <p>About</p>
+              </Link>
+            </div>
+            <div>
+              <Link
+                style={{ textDecoration: "none" }}
+                to="gallery"
+                className="gallery"
+              >
+                <p>Gallery</p>
+              </Link>
+            </div>
+            <div>
+              <Link
+                style={{ textDecoration: "none" }}
+                to="news"
+                className="news"
+              >
+                <p>News</p>
+              </Link>
+            </div>
+            <div>
+              <Link
+                style={{ textDecoration: "none" }}
+                to="events"
+                className="events"
+              >
+                <p>Events</p>
+              </Link>
+            </div>
+            <div>
+              <Link
+                style={{ textDecoration: "none" }}
+                to="results"
+                className="login"
+              >
+                <p>Results</p>
+              </Link>
+            </div>
+            <div>
+              <Link
+                style={{ textDecoration: "none" }}
+                to="projects"
+                className="login"
+              >
+                <p>Projects</p>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="mithiu-logo">
           <img src={logo} />
         </div>
         <div className="logins">
-          <Link to="login" className="login">
+          <Link style={{ textDecoration: "none" }} to="login" className="login">
             <p>Login</p>
           </Link>
-          <Link to="register" className="cta-button">
+          <Link
+            style={{ textDecoration: "none" }}
+            to="register"
+            className="cta-button"
+          >
             <span>Register</span>
           </Link>
         </div>
@@ -51,30 +92,74 @@ export function Header() {
           <img src={logo} />
         </div>
         <div className="left-header">
-          <Link to="/about" className="about">
-            <p>About</p>
-          </Link>
-          <Link to="gallery" className="gallery">
-            <p>Gallery</p>
-          </Link>
-          <Link to="news" className="news">
-            <p>News</p>
-          </Link>
-          <Link to="events" className="events">
-            <p>Events</p>
-          </Link>
-          <Link to="results" className="login">
-            <p>Results</p>
-          </Link>
-          <Link to="projects" className="login">
-            <p>Projects</p>
-          </Link>
-          <Link to="login" className="login">
-            <p>Login</p>
-          </Link>
-          <Link to="register" className="cta-button">
-            <span>Register</span>
-          </Link>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/about"
+              className="about"
+            >
+              <p>About</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="gallery"
+              className="gallery"
+            >
+              <p>Gallery</p>
+            </Link>
+          </div>
+          <div>
+            <Link style={{ textDecoration: "none" }} to="news" className="news">
+              <p>News</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="events"
+              className="events"
+            >
+              <p>Events</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="results"
+              className="login"
+            >
+              <p>Results</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="projects"
+              className="login"
+            >
+              <p>Projects</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="login"
+              className="login"
+            >
+              <p>Login</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="register"
+              className="cta-button"
+            >
+              <span>Register</span>
+            </Link>
+          </div>
         </div>
       </div>
     </header>

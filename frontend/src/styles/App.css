@@ -59,11 +59,23 @@ header img {
   justify-content: space-between;
   width: 100%;
 }
+.left-header p{
+  text-decoration: none;
+  color: var(--primary-color);
+}
+.left-header p:hover{
+  border-bottom: 2px solid #fcaa32;
+  transform: scale(1.05);
+}
+
 /* header to only display on small screens */
 .small-screens {
   display: none;
 }
+.left-header p{
+  color: var(--primary-color);
 
+}
 .left-header {
   color: var(--primary-color);
   display: flex;
