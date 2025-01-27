@@ -1,4 +1,4 @@
-// import landingImg from '../images/landing-page-photo.png'
+import { Link } from "react-router-dom";
 import visionLogo from "../images/vision-logo.png";
 import missionLogo from "../images/mission-logo.png";
 import objectiveLogo from "../images/objective-logo.png";
@@ -24,7 +24,10 @@ export function Landing() {
               community development, and global impact through collaboration and
               innovation.
             </p>
-            <span>Read more...</span>
+            <Link to="welcome" style={{ textDecoration: "none" }}>
+              {" "}
+              <span>Read more...</span>
+            </Link>
           </section>
         </div>
         <div className="mission-container">
@@ -38,7 +41,10 @@ export function Landing() {
               enabling collective progress and the achievement of meaningful
               goals.
             </p>
-            <span>Read more...</span>
+            <Link to="welcome" style={{ textDecoration: "none" }}>
+              {" "}
+              <span>Read more...</span>
+            </Link>{" "}
           </section>
         </div>
         <div className="objective-container">
@@ -51,7 +57,10 @@ export function Landing() {
               Enable the free flow of ideas and opportunities that drive
               personal growth and community development
             </p>
-            <span>Read more...</span>
+            <Link style={{ textDecoration: "none" }} to="welcome">
+              {" "}
+              <span>Read more...</span>
+            </Link>{" "}
           </section>
         </div>
       </div>
