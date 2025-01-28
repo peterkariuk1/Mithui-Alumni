@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 export function Welcome() {
   return (
     <div className="welcome-container">
@@ -7,7 +7,10 @@ export function Welcome() {
         Welcome to the Mithui Alumni Association website, where we connect,
         share ideas, and create success stories.
       </p>
-      <span>Explore</span>
+
+      <Link to="welcome" style={{ color: "#fcfcf7" }}>
+        <span>Explore</span>
+      </Link>
     </div>
   );
 }
