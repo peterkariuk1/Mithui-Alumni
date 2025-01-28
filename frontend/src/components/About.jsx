@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export function About() {
   return (
     <div className="about-container">
@@ -6,7 +7,9 @@ export function About() {
         Discover who we are, where we have been, and the vision that drives us
         forward.
       </p>
-      <span>Explore</span>
+      <Link to="about" style={{ textDecoration: "underline" }}>
+        <span>Explore</span>
+      </Link>
     </div>
   );
 }

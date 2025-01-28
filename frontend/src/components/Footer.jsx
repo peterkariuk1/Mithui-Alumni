@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../styles/Footer.css";
 import mithuiLogo from "../images/header-logo.png";
 import fbLogo from "../images/facebook.png";
@@ -22,7 +23,9 @@ export function Footer() {
           </p>
         </div>
         <div className="social-logos">
-          <img src={fbLogo} />
+          <Link to="https://www.facebook.com/share/g/1A2DuT4CsM/">
+            <img src={fbLogo} />
+          </Link>
           <img src={wappLogo} />
           <img src={xLogo} />
           <img src={lndLogo} />
@@ -31,28 +34,46 @@ export function Footer() {
       </div>
       <div className="centre">
         <h1>Useful Links</h1>
-        <p>About Us</p>
-        <p>News & Articles</p>
-        <p>Upcoming events</p>
-        <p>Find Us</p>
-        <p>Results</p>
-        <p>Projects</p>
-        <p>Contacts</p>
+        <Link to="about" style={{ color: "#fcfcf7" }}>
+          <p>About Us</p>
+        </Link>
+        <Link to="news" style={{ color: "#fcfcf7" }}>
+          <p>News & Articles</p>
+        </Link>
+        <Link to="events" style={{ color: "#fcfcf7" }}>
+          <p>Upcoming events</p>
+        </Link>
+        <Link
+          to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5"
+          style={{ color: "#fcfcf7" }}
+        >
+          <p>Find Us</p>
+        </Link>
+        <Link to="results" style={{ color: "#fcfcf7" }}>
+          <p>Results</p>
+        </Link>
+        <Link to="projects" style={{ color: "#fcfcf7" }}>
+          <p>Projects</p>
+        </Link>
+        <Link to="gallery" style={{ color: "#fcfcf7" }}>
+          <p>Gallery</p>
+        </Link>
+        <Link to="about" style={{ color: "#fcfcf7" }}>
+          <p>Contacts</p>
+        </Link>
       </div>
       <div className="right">
         <h1>Contact Information</h1>
         <div>
-            <img src={mailLogo}/>
-            <p>itspeterkariuki@gmail.com</p>
+          <img src={mailLogo} />
+          <p>mithuihighschool@gmail.com</p>
         </div>
         <div>
-            <img src={phoneLogo} />
-            <p>0112529019</p>
+          <img src={phoneLogo} />
+          <p>0112529019</p>
         </div>
       </div>
-      <p className="rights-text">
-        copyright © 2025 Mithui Alumni. All rights reserved
-      </p>
+      <p className="rights-text">© 2025 Mithui Alumni.</p>
     </footer>
   );
 }

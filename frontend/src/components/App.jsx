@@ -10,6 +10,7 @@ import { NewsEventsPage } from "../pages/NewsEventsPage.jsx";
 import { ResultsPage } from "../pages/ResultsPage.jsx";
 import { ProjectsPage } from "../pages/ProjectsPage.jsx";
 import { LoginPage } from "../pages/LoginPage.jsx";
+import { WelcomePage } from "../pages/WelcomePage.jsx";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <>
               <Landing />
               <Sections />
-              <Footer />
+              
             </>
           }
         />
@@ -34,7 +35,9 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
