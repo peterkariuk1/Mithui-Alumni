@@ -12,6 +12,27 @@ body {
   background-color: var(--primary-color);
   /* padding-bottom: 30px; */
 }
+/* Target the scrollbar */
+::-webkit-scrollbar {
+  width: 15px; 
+}
+
+/* Style the track (background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #f9e3c1;
+  border-radius: 30px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #0c335c; 
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #04111e; 
+}
 .landing-page {
   position: relative;
   display: flex;

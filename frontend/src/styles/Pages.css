@@ -1,0 +1,15 @@
+.about-page{
+    /* width: 100vw; */
+    /* margin: auto; */
+}
+.about-page .top{
+    display: flex;
+    height: 65vh;
+    width: 100%;
+    justify-content: space-between;
+    background-image: url('../images/pagesTop.jpg');
+    /* background-position: center; */
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
