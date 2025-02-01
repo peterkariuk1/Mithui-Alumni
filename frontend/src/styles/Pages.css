@@ -86,4 +86,20 @@
 .about-page h1{
   color: var(--secondary-color);
 }
-
+@media(max-width:880px){
+  .purpose-welcome-container{
+    flex-direction: column;
+    row-gap: 20px;
+  }
+ 
+}@media(max-width:548px){
+  .content-image{
+    width: 400px;
+  }
+ 
+}@media(max-width:435px){
+  .content-image{
+    width: 300px;
+  }
+ 
+}
