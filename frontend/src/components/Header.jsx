@@ -67,7 +67,9 @@ export function Header() {
           </div>
         </div>
         <div className="mithiu-logo">
-          <img src={logo} />
+          <Link to="/">
+            <img src={logo} />
+          </Link>
         </div>
         <div className="logins">
           <Link
@@ -88,7 +90,9 @@ export function Header() {
       </div>
       <div className="large-screens">
         <div>
-          <img src={logo} />
+          <Link to="/">
+            <img src={logo} />
+          </Link>
         </div>
         <div className="left-header">
           <div>
