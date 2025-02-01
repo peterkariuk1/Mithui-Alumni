@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../styles/Pages.css";
 import "../styles/Footer.css";
 import HomeIcon from "../images/homeicon.png";
@@ -12,12 +13,16 @@ export function WelcomePage() {
         </div>
       </section>
       <div className="navigation-section">
+        <Link to='/' style={{textDecoration:'none'}}>
         <div>
           <img src={HomeIcon} />
           <p>Home</p>
         </div>
+        </Link>
         <img style={{ height: "13px" }} src={RightIcon} />
+        <Link to='/welcome' style={{textDecoration:'none'}}>
         <p>Welcome</p>
+        </Link>
       </div>
       <section className="bottom">
         <div className="content-container">
@@ -65,8 +70,8 @@ export function WelcomePage() {
           <div>
             <h1>OUR VISION</h1>
             <p>
-              Create a dynamic alumni network that inspires lifelong
-              learning, fosters innovation, and drives sustainable community
+              Create a dynamic alumni network that inspires lifelong learning,
+              fosters innovation, and drives sustainable community
               transformation, empowering members to shape a better future for
               all.
             </p>
