@@ -17,7 +17,6 @@ body {
   width: 15px; 
 }
 
-/* Style the track (background of the scrollbar) */
 ::-webkit-scrollbar-track {
   background: #f9e3c1;
   border-radius: 30px;
@@ -66,8 +65,9 @@ header {
   top: 30px;
   z-index: 2;
   backdrop-filter: blur(5px);
-  background-color: #0000003e;
+  background-color: #000000a4;
   border-bottom: 1px solid #fcaa32;
+  border-radius: 5px;
   animation: 2.2s ease 1 normal headerLoad;
 }
 header img {
