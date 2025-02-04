@@ -73,7 +73,9 @@ export function Footer() {
           <p>0112529019</p>
         </div>
       </div>
+      <Link to='/admin'>
       <p className="rights-text">© 2025 Mithui Alumni.</p>
+      </Link>
     </footer>
   );
 }
