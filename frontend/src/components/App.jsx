@@ -4,7 +4,7 @@ import { Header } from "./Header.jsx";
 import { Landing } from "./Landing.jsx";
 import { Sections } from "./Sections.jsx";
 import { Footer } from "./Footer.jsx";
-import { AboutPage } from "../pages/AboutPage.jsx";
+// import { AboutPage } from "../pages/AboutPage.jsx";
 import { GalleryPage } from "../pages/GalleryPage.jsx";
 import { NewsEventsPage } from "../pages/NewsEventsPage.jsx";
 import { ResultsPage } from "../pages/ResultsPage.jsx";
@@ -27,7 +27,7 @@ function App() {
             </>
           }
         />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/about" element={<WelcomePage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/news" element={<NewsEventsPage />} />
         <Route path="/events" element={<NewsEventsPage />} />
