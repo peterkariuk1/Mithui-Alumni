@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import { RegisterTab } from "../components/RegisterTab";
 import "../styles/Pages.css";
 import "../styles/Footer.css";
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import welcPageImage from "../images/welcomepage.jpg";
+import abtPageImage from "../images/aboutpage.png";
 export function WelcomePage() {
   return (
     <div className="about-page">
@@ -13,25 +15,25 @@ export function WelcomePage() {
         </div>
       </section>
       <div className="navigation-section">
-        <Link to='/' style={{textDecoration:'none'}}>
-        <div>
-          <img src={HomeIcon} />
-          <p>Home</p>
-        </div>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div>
+            <img src={HomeIcon} />
+            <p>Home</p>
+          </div>
         </Link>
         <img style={{ height: "13px" }} src={RightIcon} />
-        <Link to='/welcome' style={{textDecoration:'none'}}>
-        <p>Welcome</p>
+        <Link to="/welcome" style={{ textDecoration: "none" }}>
+          <p>Welcome</p>
         </Link>
       </div>
       <section className="bottom">
         <div className="content-container">
           <img className="content-image" src={welcPageImage} />
           <p>
-            Welcome to the Mithui Mixed Secondary School Alumni Association
-            website! At the heart of humanity lies an unyielding drive to
-            improve and advance our lives, often through the wonders of
-            technology and collective innovation. <br />
+            Welcome to the Mithui Mixed Secondary School Alumni Association! At
+            the heart of humanity lies an unyielding drive to improve and
+            advance our lives, often through the wonders of technology and
+            collective innovation. <br />
             <p>
               This unending pursuit of progress is not an individual journey—it
               is a shared endeavor, requiring collaboration, mutual support, and
@@ -93,6 +95,37 @@ export function WelcomePage() {
               society.
             </p>
           </div>
+        </div>
+        <RegisterTab />
+        <h1>Discover our story, values, and the vision that unites us.</h1>
+        <div className="content--container">
+          <img className="content--image" src={abtPageImage} />
+          <p>
+            Mithui Mixed Secondary School is a public sub-county school located
+            in Rachuonyo South sub-county, Homabay County. Situated
+            approximately 3.5 km from Oyugis, the school is accessible via the
+            Oyugis-Gamba road.
+            <br />
+            <div>
+              Find Us
+              <Link>
+                <p>Link to the map</p>
+              </Link>
+            </div>
+            Established in 2004 through a partnership between the local
+            government and the community, Mithui has grown into a center of
+            academic excellence. The local government played a key role in
+            developing infrastructure, while the community contributed land and
+            other resources to support its foundation.
+            <p>
+              Under the leadership of the founding Principal, Mr. Gerishon Obala
+              Otilah, the school saw its pioneer students sit for their KCSE
+              examinations in 2007. Since then, multiple cohorts have graduated,
+              with many alumni excelling in various professional fields. Mithui
+              continues to nurture students, equipping them with knowledge and
+              values that empower them to make a meaningful impact in society.
+            </p>
+          </p>
         </div>
       </section>
     </div>
