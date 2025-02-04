@@ -4,6 +4,7 @@
   --tertiary-color: #b73836;
   --sec-2-color: #fcaa32;
 }
+/* STYLES FOR THE WELCOME PAGE */
 .about-page .top {
   display: flex;
   height: 58vh;
@@ -53,7 +54,8 @@
   width: 20px;
   /* height: 20px; */
 }
-.bottom {
+.bottom,
+.bottom-results {
   width: 90vw;
   margin: auto;
   margin-top: 50px;
@@ -94,9 +96,179 @@
   .content-image {
     width: 400px;
   }
+  /* .content--image {
+    width: 300px;
+  } */
 }
 @media (max-width: 435px) {
   .content-image {
     width: 300px;
+  }
+  /* .content--image {
+    width: 200px;
+  } */
+}
+/* Styles for the results page */
+
+.results-content-container {
+  display: flex;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.results-image {
+  width: 450px;
+  width: 350px;
+  border-radius: 10px;
+}
+.upper-text-results {
+  color: var(--secondary-color);
+  font-size: 30px;
+  text-align: center;
+}
+.year-results-container {
+  background-color: rgba(234, 234, 234, 0.422);
+  padding: 5px 10px;
+  margin-bottom: 13px;
+  box-shadow: 1px 1px 5px #1341724e;
+}
+.mean-text {
+  color: var(--tertiary-color);
+  font-weight: 500;
+}
+.all-grades-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+
+.viewmore-container {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  padding: 0px 0px 35px 0px;
+}
+.view-more-icon {
+  width: 25px;
+}
+.view-more-icon:active img,
+.viewmore-container:active p {
+  transform: scale(0.9);
+}
+.grades-container h1 {
+  color: var(--primary-color);
+  text-align: center;
+  margin: 2px;
+  font-weight: 500;
+  font-size: 24px;
+}
+.grades-container p {
+  color: var(--primary-color);
+  margin: 2px;
+}
+.all-years-container {
+  display: flex;
+  flex-direction: column;
+}
+.grades-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 3px 5px 3px;
+  background-color: var(--secondary-color);
+}
+.grades-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.grades-container img {
+  width: 28px;
+  height: 28px;
+}
+@media (max-width: 780px) {
+  .results-image {
+    width: 300px;
+    height: 180px;
+  }
+  .upper-text-results {
+    color: var(--secondary-color);
+    font-size: 18px;
+    text-align: center;
+  }
+}
+@media (max-width: 540px) {
+  .results-image {
+    width: 250px;
+    height: 230px;
+  }
+  .upper-text-results {
+    color: var(--secondary-color);
+    font-size: 15px;
+    text-align: start;
+  }
+}
+
+/* Styles for get started component */
+
+.get-started {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  justify-content: center;
+  align-items: center;
+  gap: -3px;
+}
+.get-started p {
+  color: var(--secondary-color);
+  font-size: 36px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+.get-started button {
+  background-color: #000000ec;
+  border: 1.2px solid #fcaa32;
+  box-shadow: 1px 1px 5px #919191;
+  font-size: 20px;
+  color: var(--sec-2-color);
+  padding: 10px 25px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.get-started button:hover {
+  transform: scale(1.03);
+  background-color: #000000;
+}
+.content--image {
+  float: left;
+  width: 400px;
+  margin: 0px 30px 15px 0px;
+}
+
+.content--container p {
+  font-size: 19px;
+  text-align: justify;
+}
+
+.content--container p div {
+  color: #134172;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  margin: 20px 0px;
+}
+.content--container p div p {
+  margin: 4px;
+}
+@media (max-width: 548px) {
+  .content--image {
+    width: 300px;
+  }
+}
+@media (max-width: 435px) {
+  .content--image {
+    width: 340px;
   }
 }
