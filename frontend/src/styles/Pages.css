@@ -185,6 +185,19 @@
   width: 28px;
   height: 28px;
 }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: green;
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
 @media (max-width: 780px) {
   .results-image {
     width: 300px;
