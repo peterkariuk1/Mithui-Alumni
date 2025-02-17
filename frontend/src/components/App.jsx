@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "../styles/App.css";
 import { Header } from "./Header.jsx";
 import { Landing } from "./Landing.jsx";
@@ -14,6 +14,7 @@ import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
 
 function App() {
+  const location = useLocation();
   return (
     <>
       <Header />
@@ -24,7 +25,6 @@ function App() {
             <>
               <Landing />
               <Sections />
-              
             </>
           }
         />
@@ -39,7 +39,10 @@ function App() {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
-      <Footer />
+
+      {location.pathname !== "/login" && location.pathname !== "/register" && (
+        <Footer />
+      )}
     </>
   );
 }

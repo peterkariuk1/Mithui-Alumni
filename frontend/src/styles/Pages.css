@@ -288,8 +288,8 @@
 }
 .input-results input{
   padding: 4px 5px;
-  margin-right: 10px;
-  margin-top: 10px;
+  margin-left: 10px;
+  /* margin-top: 10px; */
   
 }
 .grades-inputs-container{
@@ -312,4 +312,76 @@
      width: 65px;
    }
   
+}
+
+/* Styles for the Login and Register Page */
+
+.login-register-page{
+  padding-top: 100px;
+  width: 90vw;
+  margin: auto;
+}
+.login-section{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  gap: 20px;
+}
+.login-section section{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.google{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: -30px;
+  /* padding: 20px -30px; */
+  border-bottom: 1.2px solid black;
+}
+.google img{
+  width: 20px;
+  height: 20px;
+}
+.login-illustration{
+  width: 420px;
+}
+.login-section section input{
+  border: none;
+  box-shadow: 1px 1.3px 5px rgba(0, 0, 0, 0.267);
+  width: 65vw;
+  padding: 20px 45px;
+  border-radius: 20px;
+  font-size: 15px;
+  margin-top: 10px;
+ 
+}
+.login-section section img{
+  width: 25px;
+  position: absolute;
+  top: 45px;
+  left: 10px;
+}
+.login-section section input:focus{
+  outline: 1.2px solid #134172;
+  box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.267);
+}
+
+
+/* Styles for the Projects Page */
+
+/* .bottom-projects{
+  width: 90vw;
+} */
+.projects-image {
+  float: left;
+  width: 500px;
+  height: 260px;
+  margin: 0px 30px 15px 0px;
+}
+.upper-text-results{
+  font-size: 19px;
+  text-align: justify;
 }
