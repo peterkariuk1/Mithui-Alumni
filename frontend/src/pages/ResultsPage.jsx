@@ -4,6 +4,7 @@ import "../styles/Pages.css";
 import "../styles/Footer.css";
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
+import loaderAnimation from "../images/loadervideo.webm";
 import StudentsIcon from "../images/studentsIcon.png";
 import viewMoreIcon from "../images/viewmore.png";
 import resultsImage from "../images/pageresults.jpg";
@@ -12,7 +13,7 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export function ResultsPage() {
   const [openResults, setOpenResults] = useState({}); // Object to track open states per year
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const toggleResults = (year) => {
@@ -43,7 +44,31 @@ export function ResultsPage() {
   }, []);
 
   if (loading) {
-    return <p>Loading results...</p>;
+    return (
+      <>
+        <section className="top">
+          <div className="page-title-container">
+            <span>|</span> Celebrating milestones and achievements together.
+          </div>
+        </section>
+        <div className="navigation-section">
+          <div>
+            <img src={HomeIcon} />
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <p>Home</p>
+            </Link>
+          </div>
+          <img style={{ height: "13px" }} src={RightIcon} />
+          <Link to="/results" style={{ textDecoration: "none" }}>
+            <p>Results</p>
+          </Link>
+        </div>
+        <div className="loader-animation">
+          <video autoPlay muted loop src={loaderAnimation}></video>
+          <p>Loading results please wait ...</p>
+        </div>
+      </>
+    );
   }
 
   return (
