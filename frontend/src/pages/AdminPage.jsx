@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import "../styles/Pages.css";
+
+export function AdminPage() {
 import { useState } from "react";
 import { db } from "../../firebaseConfig";
 import { setDoc, doc } from "firebase/firestore";
@@ -61,7 +63,6 @@ export function AdminPage() {
       setGradeE('');
     }
   };  
-
   return (
     <div className="about-page">
       <section className="top">
@@ -140,6 +141,7 @@ export function AdminPage() {
             </div>
             <button type="submit" className="btn">Upload Grades</button>
           </form>
+
         </div>
       </section>
     </div>
