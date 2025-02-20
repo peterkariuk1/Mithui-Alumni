@@ -101,6 +101,14 @@
   } */
 }
 @media (max-width: 435px) {
+  .page-title-container {
+    font-size: 40px;
+    font-weight: 500;
+    padding-top: 100px;
+  }
+  .page-title-container span {
+    font-size: 45px;
+  }
   .content-image {
     width: 300px;
   }
@@ -110,6 +118,20 @@
 }
 /* Styles for the results page */
 
+.loader-animation{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color);
+  font-size: 25px;
+}
+.loader-animation video{
+  width: 40px;
+  height: 40px;
+  margin-top: 20px;
+}
 .results-content-container {
   display: flex;
   margin-bottom: 10px;
@@ -191,12 +213,14 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  background-color: green;
+  background-color: rgb(2, 164, 2);
+  color: var(--primary-color);
   height: 50px;
   width: 100px;
   border-radius: 5px;
   cursor: pointer;
-
+  justify-self: center;
+  border: none;
 }
 @media (max-width: 780px) {
   .results-image {
@@ -288,41 +312,44 @@
 
 /* Styles for the Admin Page */
 
-.admin-panel{
+.admin-panel {
   width: 90vw;
   margin: auto;
   margin-top: 30px;
 }
 
-.results-inputs-container{
+.results-inputs-container {
   background-color: #eeeeee;
   padding: 10px 15px;
   border-radius: 15px;
 }
-.input-results input{
+.input-results input {
   padding: 4px 5px;
   margin-right: 10px;
   margin-top: 10px;
-  
 }
-.grades-inputs-container{
- display: grid;
- gap: 15px; 
- grid-template-columns: 1fr 1fr 1fr 1fr;
+.grades-inputs-container {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.grades-inputs-container input{
+.grades-inputs-container input {
   width: 78px;
 }
-.grades-inputs-container div{
+.grades-inputs-container div {
   display: flex;
   gap: 12px;
 }
-@media (max-width:545px) {
-  .grades-inputs-container{
-    grid-template-columns: 1fr 1fr
-   }
-   .grades-inputs-container input{
-     width: 65px;
-   }
-  
+@media (max-width: 730px) {
+  .grades-inputs-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (max-width: 545px) {
+  .grades-inputs-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grades-inputs-container input {
+    width: 65px;
+  }
 }
