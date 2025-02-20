@@ -185,6 +185,19 @@
   width: 28px;
   height: 28px;
 }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: green;
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
 @media (max-width: 780px) {
   .results-image {
     width: 300px;
@@ -288,8 +301,9 @@
 }
 .input-results input{
   padding: 4px 5px;
-  margin-left: 10px;
-  /* margin-top: 10px; */
+  margin-right: 10px;
+  margin-top: 10px;
+
   
 }
 .grades-inputs-container{
@@ -313,6 +327,7 @@
    }
   
 }
+
 
 /* Styles for the Login and Register Page */
 
@@ -385,3 +400,4 @@
   font-size: 19px;
   text-align: justify;
 }
+
