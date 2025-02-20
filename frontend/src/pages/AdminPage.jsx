@@ -3,7 +3,7 @@ import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import "../styles/Pages.css";
 import { useState } from "react";
-import { db } from "../../firebaseConfig";
+import { db } from "../../firebaseConfig.js";
 import { setDoc, doc } from "firebase/firestore";
 
 export function AdminPage() {
