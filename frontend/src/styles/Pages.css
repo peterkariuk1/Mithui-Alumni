@@ -55,7 +55,8 @@
   /* height: 20px; */
 }
 .bottom,
-.bottom-results {
+.bottom-results,
+.bottom-projects {
   width: 90vw;
   margin: auto;
   margin-top: 50px;
@@ -118,7 +119,7 @@
 }
 /* Styles for the results page */
 
-.loader-animation{
+.loader-animation {
   display: flex;
   flex-direction: column;
   justify-self: center;
@@ -127,7 +128,7 @@
   color: var(--secondary-color);
   font-size: 25px;
 }
-.loader-animation video{
+.loader-animation video {
   width: 40px;
   height: 40px;
   margin-top: 20px;
@@ -354,7 +355,6 @@
   }
 }
 
-
 /* Styles for the Login and Sig up page */
 
 .login-section {
@@ -400,7 +400,8 @@
   padding: 23px 8px 8px 10px;
 }
 
-.password-container, .username-container {
+.password-container,
+.username-container {
   display: flex;
   flex-direction: column;
   /* height: min-content; */
@@ -439,13 +440,10 @@
   transition: 0.4s ease background-color, 0.5s ease transform;
 }
 
-.login-button p{
+.login-button p {
   margin: 0;
   font-size: 16px;
-
 }
-
-
 
 .left-section button:hover {
   background-color: rgb(30, 30, 30);
@@ -459,10 +457,12 @@
   align-items: center;
 }
 @keyframes scaleUp {
-  0%,80%,100%{
+  0%,
+  80%,
+  100% {
     transform: scale(0);
   }
-  40%{
+  40% {
     transform: scale(1);
   }
 }
@@ -490,18 +490,88 @@
   animation: 13.5s ease-in-out 0.3s infinite alternate breathe;
 }
 
-@media(max-width:540px){
- .right-section{
-  display: none;
- }
- .left-section{
-  width: 100vw;
- }
- .login-instruction {
-  margin-bottom: 120px;
-}
-.left-section h1 {
-  margin-bottom: 40px;
-}
+@media (max-width: 540px) {
+  .right-section {
+    display: none;
+  }
+  .left-section {
+    width: 100vw;
+  }
+  .login-instruction {
+    margin-bottom: 120px;
+  }
+  .left-section h1 {
+    margin-bottom: 40px;
+  }
 }
 
+/* STYLES FOR THE PROJECTS PAGE */
+
+.projects-content-container {
+  display: flex;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.projects-image {
+  width: 450px;
+  height: 350px;
+  border-radius: 10px;
+}
+.upper-text-projects {
+  color: var(--secondary-color);
+  font-size: 30px;
+  text-align: center;
+}
+.finance-committee img {
+  width: 40px;
+  height: 40px;
+}
+.finance-committee:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+.member-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.alumni-initiatives-container h1,
+.alumni-projects-container h1{
+  text-align: center;
+  color: var(--secondary-color);
+}
+.alumni-initiatives-container h2{
+  margin: 0;
+}
+.alumni-initiatives-container span{
+  font-size: 18px;
+  color: var(--tertiary-color);
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+@media (max-width: 810px) {
+  .results-image {
+    width: 300px;
+    height: 180px;
+  }
+  .upper-text-projects {
+    color: var(--secondary-color);
+    font-size: 18px;
+    text-align: center;
+  }
+}
+@media (max-width: 630px) {
+  .projects-content-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .projects-image {
+    width: 350px;
+    height: 230px;
+  }
+  .upper-text-projects {
+    font-size: 18px;
+    text-align: start;
+  }
+}
