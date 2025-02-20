@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "../styles/App.css";
 import { Header } from "./Header.jsx";
 import { Landing } from "./Landing.jsx";
@@ -10,13 +10,17 @@ import { NewsEventsPage } from "../pages/NewsEventsPage.jsx";
 import { ResultsPage } from "../pages/ResultsPage.jsx";
 import { ProjectsPage } from "../pages/ProjectsPage.jsx";
 import { LoginPage } from "../pages/LoginPage.jsx";
+import { RegisterPage } from "../pages/RegisterPage.jsx";
 import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
 
 function App() {
+  const location = useLocation();
   return (
     <>
-      <Header />
+      {location.pathname !== "/login" && location.pathname !== "/register" && (
+        <Header />
+      )}
       <Routes>
         <Route
           path="/"
@@ -24,7 +28,6 @@ function App() {
             <>
               <Landing />
               <Sections />
-              
             </>
           }
         />
@@ -35,11 +38,11 @@ function App() {
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
-      <Footer />
+      {location.pathname !== '/login' && location.pathname !== '/register' && (<Footer/>)}
     </>
   );
 }
