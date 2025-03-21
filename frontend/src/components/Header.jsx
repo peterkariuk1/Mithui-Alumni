@@ -34,18 +34,10 @@ export function Header() {
             </Link>
             <Link style={{ textDecoration: "none" }} to="news" className="news">
               <div>
-                <p>News</p>
+                <p>News & Events</p>
               </div>
             </Link>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="events"
-              className="events"
-            >
-              <div>
-                <p>Events</p>
-              </div>
-            </Link>
+        
             <Link
               style={{ textDecoration: "none" }}
               to="results"
@@ -115,16 +107,7 @@ export function Header() {
           </div>
           <div>
             <Link style={{ textDecoration: "none" }} to="news" className="news">
-              <p>News</p>
-            </Link>
-          </div>
-          <div>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="events"
-              className="events"
-            >
-              <p>Events</p>
+              <p>News & Events</p>
             </Link>
           </div>
           <div>

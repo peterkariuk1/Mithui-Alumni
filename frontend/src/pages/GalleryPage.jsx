@@ -18,7 +18,9 @@ export function GalleryPage() {
         <img style={{ height: "13px" }} src={RightIcon} />
         <p>Gallery</p>
       </div>
-      <section className="bottom"></section>
+      <section className="bottom">
+        hello
+      </section>
     </div>
   );
 }
