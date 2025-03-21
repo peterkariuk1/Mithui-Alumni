@@ -26,7 +26,9 @@ export function Footer() {
           <Link to="https://www.facebook.com/share/g/1A2DuT4CsM/">
             <img src={fbLogo} />
           </Link>
-          <img src={wappLogo} />
+          <Link to="https://wa.me/0790416657" target="_blank">
+            <img src={wappLogo} />
+          </Link>
           <img src={xLogo} />
           <img src={lndLogo} />
           <img className="hand-cursor" src={handCursor} />
@@ -68,13 +70,15 @@ export function Footer() {
           <img src={mailLogo} />
           <p>mithuihighschool@gmail.com</p>
         </div>
+        <a style={{textDecoration:'none', color:'#fcfcf7'}} href="tel:+254790416657">
         <div>
           <img src={phoneLogo} />
-          <p>0112529019</p>
+          <p>0790416657</p>
         </div>
+          </a>
       </div>
-      <Link to='/admin'>
-      <p className="rights-text">© 2025 Mithui Alumni.</p>
+      <Link to="/admin">
+        <p className="rights-text">© 2025 Mithui Alumni.</p>
       </Link>
     </footer>
   );
