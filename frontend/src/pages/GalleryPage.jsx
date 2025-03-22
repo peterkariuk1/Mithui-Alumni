@@ -5,7 +5,7 @@ import RightIcon from "../images/righticon.svg";
 
 import jamesJuma from "../images/jamesjuma.jpg";
 import lucyOoko from "../images/lucyouko.jpg";
-import mrGerishon from "../images/mrGerishon.jpg";
+import mrGerishon from "../images/mrgerishon.jpg";
 import georgeBongo from "../images/georgeBongo.jpg";
 import lorineNyaoke from "../images/lorineNyaoke.jpg";
 import peterOngudu from "../images/maxwellAzeda.jpg";
