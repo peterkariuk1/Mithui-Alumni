@@ -11,7 +11,7 @@ export function NewsEventsPage() {
       text: "Join us at the Cultural Festival, presented by The ValleyCulture Team & Trinity Events, for a celebration of diverse traditions, music, dance, and heritage! 🎶🪘",
     },
     {
-      type:"Event",
+      type:"News",
       image: posterImage,
       text: "Join us at the Cultural Festival, presented by The ValleyCulture Team & Trinity Events, for a celebration of diverse traditions, music, dance, and heritage! 🎶🪘",
     },
