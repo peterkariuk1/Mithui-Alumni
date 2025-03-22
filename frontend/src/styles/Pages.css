@@ -649,3 +649,41 @@ opacity: 1;
   font-weight: 300;
   text-align: center;
 }
+/* Styles for responsiveness in Gallery Page */
+
+@media (max-width: 860px) {
+  .gallery-grid {
+    column-count: 3; /* Adjust for different screen sizes */
+  }
+  .random-grid{
+    column-count: 1; /* Adjust for different screen sizes */
+  } 
+  .image-caption h1{
+    font-size: 16px;
+  }
+  .image-caption p{
+    font-size: 14px;
+  }
+}
+@media (max-width: 730px) {
+  .gallery-grid {
+    column-count: 2; /* Adjust for different screen sizes */
+  }
+  .random-grid{
+    column-count: 1; /* Adjust for different screen sizes */
+  } 
+  .image-caption h1{
+    font-size: 16px;
+  }
+  .image-caption p{
+    font-size: 14px;
+  }
+}
+/* @media (max-width: 545px) {
+  .grades-inputs-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grades-inputs-container input {
+    width: 65px;
+  }
+} */
