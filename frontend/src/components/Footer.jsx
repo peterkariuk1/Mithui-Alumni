@@ -46,7 +46,7 @@ export function Footer() {
           <p>Upcoming events</p>
         </Link>
         <Link
-          to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5"
+          to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5" target="_blank"
           style={{ color: "#fcfcf7" }}
         >
           <p>Find Us</p>

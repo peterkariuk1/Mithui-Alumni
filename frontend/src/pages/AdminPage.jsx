@@ -7,20 +7,20 @@ import { db } from "../../firebaseConfig.js";
 import { setDoc, doc } from "firebase/firestore";
 
 export function AdminPage() {
-  const [year, setYear] = useState('')
-  const [mean, setMean] = useState('')
-  const [gradeA, setGradeA] = useState('')
-  const [gradeAminus, setGradeAminus] = useState('')
-  const [gradeBplus, setGradeBplus] = useState('')
-  const [gradeB, setGradeB] = useState('')
-  const [gradeBminus, setGradeBminus] = useState('')
-  const [gradeCplus, setGradeCplus] = useState('')
-  const [gradeC, setGradeC] = useState('')
-  const [gradeCminus, setGradeCminus] = useState('')
-  const [gradeDplus, setGradeDplus] = useState('')
-  const [gradeD, setGradeD] = useState('')
-  const [gradeDminus, setGradeDminus] = useState('')
-  const [gradeE, setGradeE] = useState('')
+  const [year, setYear] = useState("");
+  const [mean, setMean] = useState("");
+  const [gradeA, setGradeA] = useState("");
+  const [gradeAminus, setGradeAminus] = useState("");
+  const [gradeBplus, setGradeBplus] = useState("");
+  const [gradeB, setGradeB] = useState("");
+  const [gradeBminus, setGradeBminus] = useState("");
+  const [gradeCplus, setGradeCplus] = useState("");
+  const [gradeC, setGradeC] = useState("");
+  const [gradeCminus, setGradeCminus] = useState("");
+  const [gradeDplus, setGradeDplus] = useState("");
+  const [gradeD, setGradeD] = useState("");
+  const [gradeDminus, setGradeDminus] = useState("");
+  const [gradeE, setGradeE] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,22 +45,22 @@ export function AdminPage() {
     } catch (error) {
       alert(error.message);
     } finally {
-      setYear('');
-      setMean('');
-      setGradeA('');
-      setGradeAminus('');
-      setGradeBplus('');
-      setGradeB('');
-      setGradeBminus('');
-      setGradeCplus('');
-      setGradeC('');
-      setGradeCminus('');
-      setGradeDplus('');
-      setGradeD('');
-      setGradeDminus('');
-      setGradeE('');
+      setYear("");
+      setMean("");
+      setGradeA("");
+      setGradeAminus("");
+      setGradeBplus("");
+      setGradeB("");
+      setGradeBminus("");
+      setGradeCplus("");
+      setGradeC("");
+      setGradeCminus("");
+      setGradeDplus("");
+      setGradeD("");
+      setGradeDminus("");
+      setGradeE("");
     }
-  };  
+  };
 
   return (
     <div className="about-page">
@@ -84,62 +84,159 @@ export function AdminPage() {
       <section className="admin-panel">
         {/* Input fields for admin to add results */}
         <div className="results-inputs-container">
-          <h1>Add Results:</h1>
+          <h1>Add Results: Results Page</h1>
           <form onSubmit={handleSubmit} className="input-results">
-            <input type="text" placeholder="Enter Year" value={year} onChange={(e) => setYear(e.target.value)} />
-            <input type="text" step="any" placeholder="Enter Mean Grade" value={mean} onChange={(e) => setMean(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Enter Year"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+            <input
+              type="text"
+              step="any"
+              placeholder="Enter Mean Grade"
+              value={mean}
+              onChange={(e) => setMean(e.target.value)}
+            />
             <div className="grades-inputs-container">
               <div>
                 <p>Grade A:</p>
-                <input type="text" placeholder="Grade A" value={gradeA} onChange={(e) => setGradeA(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade A"
+                  value={gradeA}
+                  onChange={(e) => setGradeA(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade A-:</p>
-                <input type="text" placeholder="Grade A-" value={gradeAminus} onChange={(e) => setGradeAminus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade A-"
+                  value={gradeAminus}
+                  onChange={(e) => setGradeAminus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade B+:</p>
-                <input type="text" placeholder="Grade B+" value={gradeBplus} onChange={(e) => setGradeBplus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade B+"
+                  value={gradeBplus}
+                  onChange={(e) => setGradeBplus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade B:</p>
-                <input type="text" placeholder="Grade B" value={gradeB} onChange={(e) => setGradeB(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade B"
+                  value={gradeB}
+                  onChange={(e) => setGradeB(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade B-:</p>
-                <input type="text" placeholder="Grade B-" value={gradeBminus} onChange={(e) => setGradeBminus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade B-"
+                  value={gradeBminus}
+                  onChange={(e) => setGradeBminus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade C+:</p>
-                <input type="text" placeholder="Grade C+" value={gradeCplus} onChange={(e) => setGradeCplus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade C+"
+                  value={gradeCplus}
+                  onChange={(e) => setGradeCplus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade C:</p>
-                <input type="text" placeholder="Grade C" value={gradeC} onChange={(e) => setGradeC(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade C"
+                  value={gradeC}
+                  onChange={(e) => setGradeC(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade C-:</p>
-                <input type="text" placeholder="Grade C-" value={gradeCminus} onChange={(e) => setGradeCminus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade C-"
+                  value={gradeCminus}
+                  onChange={(e) => setGradeCminus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade D+:</p>
-                <input type="text" placeholder="Grade D+" value={gradeDplus} onChange={(e) => setGradeDplus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade D+"
+                  value={gradeDplus}
+                  onChange={(e) => setGradeDplus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade D:</p>
-                <input type="text" placeholder="Grade D" value={gradeD} onChange={(e) => setGradeD(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade D"
+                  value={gradeD}
+                  onChange={(e) => setGradeD(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade D-:</p>
-                <input type="text" placeholder="Grade D-" value={gradeDminus} onChange={(e) => setGradeDminus(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade D-"
+                  value={gradeDminus}
+                  onChange={(e) => setGradeDminus(e.target.value)}
+                />
               </div>
               <div>
                 <p>Grade E:</p>
-                <input type="text" placeholder="Grade E" value={gradeE} onChange={(e) => setGradeE(e.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Grade E"
+                  value={gradeE}
+                  onChange={(e) => setGradeE(e.target.value)}
+                />
               </div>
             </div>
-            <button type="submit" className="btn">Upload Grades</button>
+            <button type="submit" className="btn">
+              Upload Grades
+            </button>
           </form>
+        </div>
+        <h1>Input images to the gallery grid: Gallery Page</h1>
+        <div className="input-to-gallery-container">
+          <input type="file" accept="image/*" />
+          <button>Submit</button>
+          <div></div>
+        </div>
+        <div className="publish-news-events-container">
+          <h1>Publish News or Events here: News & Events Page</h1>
+          <div className="publish-container">
+            <input type="file" accept="image/*" />
+            <label>
+              <p>Choose between News and Event only</p>
+  <input type="radio" name="option" value="News"/> News
+</label>
+<label>
+  <input type="radio" name="option" value="Event"/> Event
+</label>
+            <input
+              type="text"
+              placeholder="Input description of the news or event only"
+            />
+            <button>Submit</button>
+          </div>
         </div>
       </section>
     </div>
