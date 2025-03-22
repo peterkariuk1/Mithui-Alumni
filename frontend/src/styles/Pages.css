@@ -705,3 +705,15 @@ opacity: 1;
   padding-top:10px ;
   padding-bottom:10px ;
 }
+
+/* Styles for responsiveness in the news and events page  */
+@media(max-width:640px){
+  .poster-item img{
+    width: 200px;
+  }
+  .poster-item h1{
+    font-size: 16px;
+  }.poster-item p{
+    font-size: 15px;
+  }
+}
