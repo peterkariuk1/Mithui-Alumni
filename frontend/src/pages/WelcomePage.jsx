@@ -108,7 +108,7 @@ export function WelcomePage() {
             <br />
             <div>
               Find Us
-              <Link>
+              <Link to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5" target="_blank">
                 <p>Link to the map</p>
               </Link>
             </div>
