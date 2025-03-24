@@ -1,4 +1,5 @@
 import "../styles/Pages.css";
+import { Link } from "react-router-dom";
 import HomeIcon from "../images/homeicon.png";
 import clickIcon from "../images/hover.png";
 import RightIcon from "../images/righticon.svg";
@@ -27,9 +28,6 @@ import image7 from "../images/image7.jpg";
 import image10 from "../images/image10.jpg";
 import image8 from "../images/image8.jpg";
 import image9 from "../images/image9.jpg";
-
-
-
 
 export function GalleryPage() {
   const galleryItems = [
@@ -92,35 +90,49 @@ export function GalleryPage() {
   const randomImages = [
     {
       image: image1,
-    },{
+    },
+    {
       image: image2,
-    },{
+    },
+    {
       image: image4,
-    },{
+    },
+    {
       image: image4,
-    },{
+    },
+    {
       image: image5,
-    },{
+    },
+    {
       image: image6,
-    },{
+    },
+    {
       image: image7,
-    },{
+    },
+    {
       image: image8,
-    },{
+    },
+    {
       image: image9,
-    },{
+    },
+    {
       image: image10,
-    },{
+    },
+    {
       image: image11,
-    },{
+    },
+    {
       image: image12,
-    },{
+    },
+    {
       image: image13,
-    },{
+    },
+    {
       image: image14,
-    },{
+    },
+    {
       image: image16,
-    }
+    },
   ];
   return (
     <div className="about-page">
@@ -132,10 +144,14 @@ export function GalleryPage() {
       <div className="navigation-section">
         <div>
           <img src={HomeIcon} />
-          <p>Home</p>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <p>Home</p>
+          </Link>
         </div>
         <img style={{ height: "13px" }} src={RightIcon} />
-        <p>Gallery</p>
+        <Link to="/gallery" style={{ textDecoration: "none" }}>
+          <p>Gallery</p>
+        </Link>
       </div>
       <section className="bottom">
         <h1>Our Leaders at a Glance</h1>

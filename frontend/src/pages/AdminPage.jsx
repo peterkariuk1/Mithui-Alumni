@@ -223,14 +223,15 @@ export function AdminPage() {
         <div className="publish-news-events-container">
           <h1>Publish News or Events here: News & Events Page</h1>
           <div className="publish-container">
+            <p>Add an event's or news poster here</p>
             <input type="file" accept="image/*" />
             <label>
               <p>Choose between News and Event only</p>
-  <input type="radio" name="option" value="News"/> News
-</label>
-<label>
-  <input type="radio" name="option" value="Event"/> Event
-</label>
+              <input type="radio" name="option" value="News" /> News
+            </label>
+            <label>
+              <input type="radio" name="option" value="Event" /> Event
+            </label>
             <input
               type="text"
               placeholder="Input description of the news or event only"

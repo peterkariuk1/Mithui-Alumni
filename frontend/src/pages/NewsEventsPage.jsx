@@ -1,5 +1,5 @@
 import "../styles/Pages.css";
-import "../styles/Footer.css";
+import {Link} from 'react-router-dom'
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import posterImage from "../images/postersample.jpg";
@@ -31,10 +31,14 @@ export function NewsEventsPage() {
       <div className="navigation-section">
         <div>
           <img src={HomeIcon} />
-          <p>Home</p>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <p>Home</p>
+          </Link>
         </div>
         <img style={{ height: "13px" }} src={RightIcon} />
-        <p>News & Events</p>
+        <Link to="/news" style={{ textDecoration: "none" }}>
+            <p>News & Events</p>
+          </Link>
       </div>
       <section className="bottom">
         <div className="posters-grid">
