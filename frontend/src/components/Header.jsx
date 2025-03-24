@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 import { useState } from "react";
 import logo from "../images/header-logo.png";
 import menuIcon from "../images/menu-icon.svg";
 
 export function Header() {
+  const { user, logout } = useAuth()
   const [isOpen, setisOpen] = useState(false);
   const toggleMenuList = () => {
     setisOpen(!isOpen);
@@ -64,20 +66,14 @@ export function Header() {
           </Link>
         </div>
         <div className="logins">
-          <Link
-            style={{ textDecoration: "none", color: "#fcfcf7" }}
-            to="login"
-            className="login"
-          >
-            <p>Login</p>
-          </Link>
-          <Link
-            style={{ textDecoration: "none" }}
-            to="register"
-            className="cta-button"
-          >
-            <span>Register</span>
-          </Link>
+        {user ? (
+            <button onClick={logout} className="logout-cta-button">Logout</button>
+          ) : (
+            <>
+              <Link to="login" className="login"><p>Login</p></Link>
+              <Link to="register" className="cta-button"><span>Register</span></Link>
+            </>
+          )}
         </div>
       </div>
       <div className="large-screens">
@@ -128,24 +124,14 @@ export function Header() {
               <p>Projects</p>
             </Link>
           </div>
-          <div>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="login"
-              className="login"
-            >
-              <p>Login</p>
-            </Link>
-          </div>
-          <div>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="register"
-              className="cta-button"
-            >
-              <span>Register</span>
-            </Link>
-          </div>
+          {user ? (
+            <button onClick={logout} className="logout-cta-button">Logout</button>
+          ) : (
+            <>
+              <Link to="login" className="login"><p>Login</p></Link>
+              <Link to="register" className="cta-button"><span>Register</span></Link>
+            </>
+          )}
         </div>
       </div>
     </header>
