@@ -25,18 +25,20 @@ export function GalleryPage() {
 
   const normalizeBackblazeUrl = (url) => {
     try {
-      if (!url || typeof url !== 'string') return '';
+      if (!url || typeof url !== "string") return "";
       url = url.trim();
-      if (url.includes('backblazeb2.com')) {
-        if (url.includes('f005.backblazeb2.com')) {
+      if (url.includes("backblazeb2.com")) {
+        if (url.includes("f005.backblazeb2.com")) {
           return url;
         }
-        if (url.includes('f002.backblazeb2.com')) {
-          return url.replace('f002.backblazeb2.com', 'f005.backblazeb2.com');
+        if (url.includes("f002.backblazeb2.com")) {
+          return url.replace("f002.backblazeb2.com", "f005.backblazeb2.com");
         }
-        const parts = url.split('/file/mithui-images/');
+        const parts = url.split("/file/mithui-images/");
         if (parts.length === 2) {
-          return `https://f005.backblazeb2.com/file/mithui-images/${encodeURI(parts[1])}`;
+          return `https://f005.backblazeb2.com/file/mithui-images/${encodeURI(
+            parts[1]
+          )}`;
         }
       }
       return encodeURI(url);
@@ -48,7 +50,8 @@ export function GalleryPage() {
 
   const handleImageError = (e, item) => {
     console.error(`Error loading gallery image for item ${item.id}`);
-    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+    e.target.src =
+      "https://via.placeholder.com/300x200?text=Image+Not+Available";
   };
 
   useEffect(() => {
@@ -65,15 +68,15 @@ export function GalleryPage() {
           return;
         }
         const galleryData = [];
-        querySnapshot.forEach(doc => {
+        querySnapshot.forEach((doc) => {
           const data = doc.data();
           if (data.imageUrl) {
             const normalizedUrl = normalizeBackblazeUrl(data.imageUrl);
             galleryData.push({
               id: doc.id,
               imageUrl: normalizedUrl,
-              caption: data.caption || '',
-              timestamp: data.timestamp?.toDate() || new Date()
+              caption: data.caption || "",
+              timestamp: data.timestamp?.toDate() || new Date(),
             });
           } else {
             console.warn(`Gallery document ${doc.id} missing imageUrl:`, data);
@@ -172,7 +175,11 @@ export function GalleryPage() {
         <div className="gallery-grid">
           {galleryItems.map((item, itemIndex) => (
             <div className="gallery-item" key={itemIndex}>
-              <img className="click-icon" src={clickIcon} alt="Click for details" />
+              <img
+                className="click-icon"
+                src={clickIcon}
+                alt="Click for details"
+              />
               <img className="gallery-image" src={item.image} alt={item.name} />
               <div className="image-caption">
                 <h1>
@@ -183,7 +190,7 @@ export function GalleryPage() {
             </div>
           ))}
         </div>
-        
+
         <h1>Moments that Count</h1>
         {loading ? (
           <div className="loading-container">
@@ -194,57 +201,31 @@ export function GalleryPage() {
             <p>{error}</p>
           </div>
         ) : galleryImages.length === 0 ? (
-          <div className="fallback-gallery">
-          </div>
+          <div className="fallback-gallery">No Images Added</div>
         ) : (
-          <div className="random-grid">
-            {galleryImages.map((item) => (
-              <div 
-                key={item.id} 
-                className="random-image-container"
-                style={{
-                  width: '300px',  // Set standard width
-                  height: '225px', // Set standard height (4:3 aspect ratio)
-                  overflow: 'hidden', // Hide overflow
-                  margin: '10px',
-                  position: 'relative',
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                  borderRadius: '8px',
-                }}
-              >
-                <img 
-                  src={item.imageUrl} 
-                  alt={item.caption || "Gallery image"}
-                  onError={(e) => handleImageError(e, item)}
-                  style={{ 
-                    width: '100%', 
-                    height: '100%',
-                    objectFit: 'cover', // Cover the container
-                    objectPosition: 'center', // Center the image
-                    transition: 'transform 0.3s ease',
-                  }}
-                  loading="lazy"
-                />
-                {item.caption && (
-                  <div 
-                    className="image-caption-overlay"
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      background: 'rgba(0,0,0,0.7)',
-                      color: 'white',
-                      padding: '8px',
-                      fontSize: '14px',
-                    }}
-                  >
-                    <p>{item.caption}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+            <div className="gallery-grid">
+              {galleryImages.map((item) => (
+                <div
+                  key={item.id}
+                  className="gallery-item"
+                >
+                  <img
+                    src={item.imageUrl}
+                    alt={item.caption || "Gallery image"}
+                    onError={(e) => handleImageError(e, item)}
+                    loading="lazy"
+                    className="gallery-image"
+                  />
+                  {item.caption && (
+                    <div
+                      className="image-caption-overlay"
+                    >
+                      <p>{item.caption}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
         )}
       </section>
       <Footer />
