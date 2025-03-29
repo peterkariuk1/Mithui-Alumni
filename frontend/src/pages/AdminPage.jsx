@@ -7,6 +7,7 @@ import { auth, db } from "../../firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { setDoc, doc, collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { Footer } from "../components/Footer.jsx";
+import loaderAnimation from "../images/loadervideo.webm";
 
 export function AdminPage() {
   const navigate = useNavigate();
@@ -66,9 +67,17 @@ export function AdminPage() {
   // Show loading state while checking authentication
   if (loading) {
     return (
-      <div className="loading-container">
-        <p>Loading admin panel...</p>
+      <>
+      <section className="top">
+      <div className="page-title-container">
+        <span>|</span> Admin Panel
       </div>
+    </section>
+    <div className="loader-animation">
+              <video autoPlay muted loop src={loaderAnimation}></video>
+              <p>Loading admin functionalities please wait ...</p>
+            </div>
+    </>
     );
   }
 
