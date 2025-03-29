@@ -6,6 +6,7 @@ import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import welcPageImage from "../images/welcomepage.jpg";
 import abtPageImage from "../images/aboutpage.png";
+import { Footer } from "../components/Footer.jsx";
 export function WelcomePage() {
   return (
     <div className="about-page">
@@ -128,6 +129,7 @@ export function WelcomePage() {
           </p>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import SVGAnimation from "../images/undraw_profile_details_re_ch9r.svg";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
+import { doc, setDoc} from "firebase/firestore"; // Add Firestore imports
 import { useState } from "react";
 
 export function RegisterPage() {
@@ -11,7 +12,16 @@ export function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        role: "user",
+        createdAt: new Date(),
+        uid: user.uid
+      });
+      
       alert("Account created successfully");
     } catch (error) {
       alert(error.message);
