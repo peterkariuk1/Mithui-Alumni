@@ -1,7 +1,8 @@
 import SVGAnimation from "../images/undraw_profile_details_re_ch9r.svg";
 import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,9 +14,26 @@ export function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Logged in successfully");
-      navigate("/")
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        
+
+        if (userData.role === "admin") {
+          alert("Logged in as admin");
+          navigate("/admin");
+        } else {
+          alert("Logged in successfully");
+          navigate("/");
+        }
+      } else {
+        alert("User profile not found. Please contact support.");
+        navigate("/");
+      }
     } catch (error) {
       alert(error.message);
     } finally {

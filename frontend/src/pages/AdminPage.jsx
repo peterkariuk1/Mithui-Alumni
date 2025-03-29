@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import "../styles/Pages.css";
-import { useState } from "react";
-import { db } from "../../firebaseConfig.js";
-import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from "../../firebaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { setDoc, doc, collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
+import { Footer } from "../components/Footer.jsx";
 
 export function AdminPage() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  
+  // Move all state declarations to the top level, before any conditional returns
   const [year, setYear] = useState("");
   const [mean, setMean] = useState("");
   const [gradeA, setGradeA] = useState("");
@@ -21,6 +27,50 @@ export function AdminPage() {
   const [gradeD, setGradeD] = useState("");
   const [gradeDminus, setGradeDminus] = useState("");
   const [gradeE, setGradeE] = useState("");
+
+  const [newsEventImage, setNewsEventImage] = useState(null);
+  const [newsEventType, setNewsEventType] = useState("News");
+  const [newsEventDescription, setNewsEventDescription] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  const [galleryImage, setGalleryImage] = useState(null);
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const [galleryCaption, setGalleryCaption] = useState("");
+
+  // Add authentication verification in case someone bypasses the protected route
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        console.log("No authenticated user, redirecting to login");
+        navigate("/login");
+        return;
+      }
+      
+      try {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (!userDoc.exists() || userDoc.data().role !== "admin") {
+          console.log("User is not an admin, redirecting");
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+        navigate("/");
+      } finally {
+        setLoading(false);
+      }
+    });
+    
+    return () => unsubscribe();
+  }, [navigate]);
+
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p>Loading admin panel...</p>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,6 +112,124 @@ export function AdminPage() {
     }
   };
 
+  const handleNewsEventSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!newsEventImage || !newsEventDescription || !newsEventType) {
+      alert("Please fill all fields and select an image");
+      return;
+    }
+    
+    setUploading(true);
+    
+    try {
+      // Create form data for the file upload
+      const formData = new FormData();
+      formData.append('file', newsEventImage);
+      
+      // Upload to your B2 upload endpoint
+      const response = await fetch('http://localhost:3001/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.message || 'Upload failed');
+      }
+      
+      // Store metadata in Firestore
+      await addDoc(collection(db, "newsEvents"), {
+        imageUrl: data.fileUrl,
+        description: newsEventDescription,
+        type: newsEventType,
+        timestamp: serverTimestamp(),
+        fileName: data.fileName
+      });
+      
+      // Reset form
+      setNewsEventImage(null);
+      setNewsEventType("News");
+      setNewsEventDescription("");
+      
+      alert("Published successfully!");
+    } catch (error) {
+      console.error("Error uploading news/event:", error);
+      alert(`Error: ${error.message}`);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setNewsEventImage(e.target.files[0]);
+    }
+  };
+
+  const handleGalleryImageChange = (e) => {
+    if (e.target.files[0]) {
+      setGalleryImage(e.target.files[0]);
+    }
+  };
+
+  const handleGallerySubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!galleryImage) {
+      alert("Please select an image for the gallery");
+      return;
+    }
+    
+    setGalleryUploading(true);
+    
+    try {
+      // Create form data for the file upload
+      const formData = new FormData();
+      formData.append('file', galleryImage);
+      
+      // Upload to your B2 upload endpoint
+      const response = await fetch('http://localhost:3001/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.message || 'Upload failed');
+      }
+      
+      // Store gallery image metadata in Firestore
+      await addDoc(collection(db, "galleryImages"), {
+        imageUrl: data.fileUrl,
+        caption: galleryCaption || '',
+        timestamp: serverTimestamp(),
+        fileName: data.fileName
+      });
+      
+      // Reset form
+      setGalleryImage(null);
+      setGalleryCaption("");
+      
+      alert("Gallery image uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading gallery image:", error);
+      alert(`Error: ${error.message}`);
+    } finally {
+      setGalleryUploading(false);
+    }
+  };
+
   return (
     <div className="about-page">
       <section className="top">
@@ -82,7 +250,6 @@ export function AdminPage() {
         </Link>
       </div>
       <section className="admin-panel">
-        {/* Input fields for admin to add results */}
         <div className="results-inputs-container">
           <h1>Add Results: Results Page</h1>
           <form onSubmit={handleSubmit} className="input-results">
@@ -216,30 +383,80 @@ export function AdminPage() {
         </div>
         <h1>Input images to the gallery grid: Gallery Page</h1>
         <div className="input-to-gallery-container">
-          <input type="file" accept="image/*" />
-          <button>Submit</button>
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={handleGalleryImageChange} 
+          />
+          {galleryImage && (
+            <p className="file-selected">File selected: {galleryImage.name}</p>
+          )}
+          <input
+            type="text"
+            placeholder="Image caption (optional)"
+            value={galleryCaption}
+            onChange={(e) => setGalleryCaption(e.target.value)}
+          />
+          <button 
+            onClick={handleGallerySubmit}
+            disabled={galleryUploading}
+          >
+            {galleryUploading ? "Uploading..." : "Submit"}
+          </button>
           <div></div>
         </div>
         <div className="publish-news-events-container">
           <h1>Publish News or Events here: News & Events Page</h1>
           <div className="publish-container">
-            <p>Add an event's or news poster here</p>
-            <input type="file" accept="image/*" />
-            <label>
+            <p>Add an event or news poster here</p>
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleImageChange}
+            />
+            {newsEventImage && (
+              <p className="file-selected">File selected: {newsEventImage.name}</p>
+            )}
+            
+            <div className="radio-options">
               <p>Choose between News and Event only</p>
-              <input type="radio" name="option" value="News" /> News
-            </label>
-            <label>
-              <input type="radio" name="option" value="Event" /> Event
-            </label>
+              <label>
+                <input 
+                  type="radio" 
+                  name="option" 
+                  value="News" 
+                  checked={newsEventType === "News"}
+                  onChange={() => setNewsEventType("News")} 
+                /> News
+              </label>
+              <label>
+                <input 
+                  type="radio" 
+                  name="option" 
+                  value="Event" 
+                  checked={newsEventType === "Event"}
+                  onChange={() => setNewsEventType("Event")} 
+                /> Event
+              </label>
+            </div>
+            
             <input
               type="text"
               placeholder="Input description of the news or event only"
+              value={newsEventDescription}
+              onChange={(e) => setNewsEventDescription(e.target.value)}
             />
-            <button>Submit</button>
+            
+            <button 
+              onClick={handleNewsEventSubmit} 
+              disabled={uploading}
+            >
+              {uploading ? "Uploading..." : "Submit"}
+            </button>
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

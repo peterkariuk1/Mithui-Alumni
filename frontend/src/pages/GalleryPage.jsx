@@ -1,8 +1,12 @@
 import "../styles/Pages.css";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import HomeIcon from "../images/homeicon.png";
 import clickIcon from "../images/hover.png";
 import RightIcon from "../images/righticon.svg";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
+import { Footer } from "../components/Footer.jsx";
 
 import jamesJuma from "../images/jamesjuma.jpg";
 import lucyOoko from "../images/lucyouko.jpg";
@@ -14,39 +18,96 @@ import maxwellAzeda from "../images/maxwellAzedaRight.jpg";
 import nicholasOlela from "../images/nicholasOlela.jpg";
 import dolphineOkoth from "../images/dolphineokoth.jpg";
 
-import image1 from "../images/image1.jpg";
-import image16 from "../images/image16.jpg";
-import image2 from "../images/image2.jpg";
-import image14 from "../images/image14.jpg";
-import image4 from "../images/image4.jpg";
-import image13 from "../images/image13.jpg";
-import image5 from "../images/image5.jpg";
-import image12 from "../images/image12.jpg";
-import image6 from "../images/image6.jpg";
-import image11 from "../images/image11.jpg";
-import image7 from "../images/image7.jpg";
-import image10 from "../images/image10.jpg";
-import image8 from "../images/image8.jpg";
-import image9 from "../images/image9.jpg";
-
 export function GalleryPage() {
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const normalizeBackblazeUrl = (url) => {
+    try {
+      if (!url || typeof url !== 'string') return '';
+      url = url.trim();
+      if (url.includes('backblazeb2.com')) {
+        if (url.includes('f005.backblazeb2.com')) {
+          return url;
+        }
+        if (url.includes('f002.backblazeb2.com')) {
+          return url.replace('f002.backblazeb2.com', 'f005.backblazeb2.com');
+        }
+        const parts = url.split('/file/mithui-images/');
+        if (parts.length === 2) {
+          return `https://f005.backblazeb2.com/file/mithui-images/${encodeURI(parts[1])}`;
+        }
+      }
+      return encodeURI(url);
+    } catch (e) {
+      console.error("Error normalizing URL:", e);
+      return url;
+    }
+  };
+
+  const handleImageError = (e, item) => {
+    console.error(`Error loading gallery image for item ${item.id}`);
+    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+  };
+
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      try {
+        const q = query(
+          collection(db, "galleryImages"),
+          orderBy("timestamp", "desc")
+        );
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          console.log("No gallery images found in Firestore");
+          setGalleryImages([]);
+          return;
+        }
+        const galleryData = [];
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          if (data.imageUrl) {
+            const normalizedUrl = normalizeBackblazeUrl(data.imageUrl);
+            galleryData.push({
+              id: doc.id,
+              imageUrl: normalizedUrl,
+              caption: data.caption || '',
+              timestamp: data.timestamp?.toDate() || new Date()
+            });
+          } else {
+            console.warn(`Gallery document ${doc.id} missing imageUrl:`, data);
+          }
+        });
+        setGalleryImages(galleryData);
+        console.log("Fetched gallery images:", galleryData.length);
+      } catch (err) {
+        console.error("Error fetching gallery images:", err);
+        setError("Failed to load gallery images");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGalleryImages();
+  }, []);
+
   const galleryItems = [
     {
       image: jamesJuma,
       name: "James Juma",
       title: "First president elect",
-      text: "Juma took over the office from David Abong' who was the Interim President overseeing the association activities before formal elections were held.",
+      text: "Juma took over the office from David Abong' who was the Interim President overseeing the association activities before formal elections were held.",
     },
     {
       image: lucyOoko,
       name: "Lucy Ooko",
       title: "Vice President of the Association 2022 - 2024",
-      text: "Class of 2014",
+      text: "Class of 2014",
     },
     {
       image: mrGerishon,
       name: "Mr. Gerishon Obalah Otilah",
-      title: "First Principal - Mithui Mixed Secondary School",
+      title: "First Principal - Mithui Mixed Secondary School",
       text: "",
     },
     {
@@ -59,81 +120,34 @@ export function GalleryPage() {
       image: lorineNyaoke,
       name: "Lorine Nyaoke",
       title: "Current Vice President",
-      text: "Class of 2014",
+      text: "Class of 2014",
     },
     {
       image: maxwellAzeda,
       name: "Maxwell Azeda",
       title: "Current Organising Secretary",
-      text: "Class of 2010",
+      text: "Class of 2010",
     },
     {
       image: peterOngudu,
       name: "Peter Ongudu",
       title: "Organising Secretary 2022 - 2024",
-      text: "Class of 2008",
+      text: "Class of 2008",
     },
     {
       image: nicholasOlela,
       name: "Nicholas Olela",
       title: "Secretary General 2022 to-date",
-      text: "Class of 2010",
+      text: "Class of 2010",
     },
     {
       image: dolphineOkoth,
       name: "Dolphine Okoth",
       title: "Association Treasurer 2022  to-date",
-      text: "Class of 2007",
-    },
-    // { image: "Image1", title: "President", text: "President" },
-  ];
-  const randomImages = [
-    {
-      image: image1,
-    },
-    {
-      image: image2,
-    },
-    {
-      image: image4,
-    },
-    {
-      image: image4,
-    },
-    {
-      image: image5,
-    },
-    {
-      image: image6,
-    },
-    {
-      image: image7,
-    },
-    {
-      image: image8,
-    },
-    {
-      image: image9,
-    },
-    {
-      image: image10,
-    },
-    {
-      image: image11,
-    },
-    {
-      image: image12,
-    },
-    {
-      image: image13,
-    },
-    {
-      image: image14,
-    },
-    {
-      image: image16,
+      text: "Class of 2007",
     },
   ];
+
   return (
     <div className="about-page">
       <section className="top">
@@ -142,13 +156,13 @@ export function GalleryPage() {
         </div>
       </section>
       <div className="navigation-section">
-        <div>
-          <img src={HomeIcon} />
-          <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div>
+            <img src={HomeIcon} alt="Home" />
             <p>Home</p>
-          </Link>
-        </div>
-        <img style={{ height: "13px" }} src={RightIcon} />
+          </div>
+        </Link>
+        <img style={{ height: "13px" }} src={RightIcon} alt=">" />
         <Link to="/gallery" style={{ textDecoration: "none" }}>
           <p>Gallery</p>
         </Link>
@@ -156,32 +170,84 @@ export function GalleryPage() {
       <section className="bottom">
         <h1>Our Leaders at a Glance</h1>
         <div className="gallery-grid">
-          {galleryItems.map((item, itemIndex) => {
-            return (
-              <div className="gallery-item" key={itemIndex}>
-                <img className="click-icon" src={clickIcon} />
-                <img className="gallery-image" src={item.image} />
-                <div className="image-caption">
-                  <h1>
-                    {item.name}- <span>{item.title}</span>
-                  </h1>
-                  <p>{item.text}</p>
-                </div>
+          {galleryItems.map((item, itemIndex) => (
+            <div className="gallery-item" key={itemIndex}>
+              <img className="click-icon" src={clickIcon} alt="Click for details" />
+              <img className="gallery-image" src={item.image} alt={item.name} />
+              <div className="image-caption">
+                <h1>
+                  {item.name}- <span>{item.title}</span>
+                </h1>
+                <p>{item.text}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
+        
         <h1>Moments that Count</h1>
-        <div className="random-grid">
-          {randomImages.map((randomImage, randomImageIndex) => {
-            return (
-              <div key={randomImageIndex} className="random-image-container">
-                <img src={randomImage.image} />
+        {loading ? (
+          <div className="loading-container">
+            <p>Loading gallery images...</p>
+          </div>
+        ) : error ? (
+          <div className="error-container">
+            <p>{error}</p>
+          </div>
+        ) : galleryImages.length === 0 ? (
+          <div className="fallback-gallery">
+          </div>
+        ) : (
+          <div className="random-grid">
+            {galleryImages.map((item) => (
+              <div 
+                key={item.id} 
+                className="random-image-container"
+                style={{
+                  width: '300px',  // Set standard width
+                  height: '225px', // Set standard height (4:3 aspect ratio)
+                  overflow: 'hidden', // Hide overflow
+                  margin: '10px',
+                  position: 'relative',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                  borderRadius: '8px',
+                }}
+              >
+                <img 
+                  src={item.imageUrl} 
+                  alt={item.caption || "Gallery image"}
+                  onError={(e) => handleImageError(e, item)}
+                  style={{ 
+                    width: '100%', 
+                    height: '100%',
+                    objectFit: 'cover', // Cover the container
+                    objectPosition: 'center', // Center the image
+                    transition: 'transform 0.3s ease',
+                  }}
+                  loading="lazy"
+                />
+                {item.caption && (
+                  <div 
+                    className="image-caption-overlay"
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      background: 'rgba(0,0,0,0.7)',
+                      color: 'white',
+                      padding: '8px',
+                      fontSize: '14px',
+                    }}
+                  >
+                    <p>{item.caption}</p>
+                  </div>
+                )}
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
+      <Footer />
     </div>
   );
 }

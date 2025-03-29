@@ -5,6 +5,7 @@ import RightIcon from "../images/righticon.svg";
 import memberIcon from "../images/committeeicon.jpg";
 import projectsImage from "../images/pageprojects.jpg";
 import waterTankImage from "../images/watertank.jpg";
+import { Footer } from "../components/Footer.jsx";
 export function ProjectsPage() {
   return (
     <div className="about-page">
@@ -131,7 +132,7 @@ export function ProjectsPage() {
                 PROJECT ALPHA: <span>Water Tank Initiative</span>
               </h2>
               <p>
-                To help address the school's water shortage, alumni members
+                To help address the school&apos;s water shortage, alumni members
                 contributed and purchased a 10,000-litre water tank as a token
                 of appreciation and support for the students.
               </p>
@@ -152,6 +153,7 @@ export function ProjectsPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
