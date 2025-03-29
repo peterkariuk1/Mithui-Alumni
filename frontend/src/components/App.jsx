@@ -2,6 +2,7 @@ import { AuthProvider } from "../context/AuthContext.jsx";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "../styles/App.css";
 import { Header } from "./Header.jsx";
+import { Footer } from "./Footer.jsx";
 import { Landing } from "./Landing.jsx";
 import { Sections } from "./Sections.jsx";
 import { GalleryPage } from "../pages/GalleryPage.jsx";
@@ -12,7 +13,7 @@ import { LoginPage } from "../pages/LoginPage.jsx";
 import { RegisterPage } from "../pages/RegisterPage.jsx";
 import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
-import ProtectedRoute from "../components/ProtectedRoute.jsx";  // Add this import
+import ProtectedRoute from "../components/ProtectedRoute.jsx"; // Add this import
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,7 @@ function App() {
             <>
               <Landing />
               <Sections />
+              <WelcomePage />
             </>
           }
         />
@@ -40,13 +42,13 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
-        <Route 
-          path="/admin" 
+        <Route
+          path="/admin"
           element={
             <ProtectedRoute>
               <AdminPage />
             </ProtectedRoute>
-          } 
+          }
         />
       </Routes>
     </AuthProvider>

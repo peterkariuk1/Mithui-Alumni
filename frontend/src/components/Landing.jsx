@@ -3,6 +3,7 @@ import visionLogo from "../images/vision-logo.png";
 import missionLogo from "../images/mission-logo.png";
 import objectiveLogo from "../images/objective-logo.png";
 
+
 export function Landing() {
   return (
     <>
@@ -64,6 +65,7 @@ export function Landing() {
           </section>
         </div>
       </div>
+      
     </>
   );
 }
