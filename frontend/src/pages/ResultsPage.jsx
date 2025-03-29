@@ -10,6 +10,7 @@ import viewMoreIcon from "../images/viewmore.png";
 import resultsImage from "../images/pageresults.jpg";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { Footer } from "../components/Footer.jsx";
 
 export function ResultsPage() {
   const [openResults, setOpenResults] = useState({}); // Object to track open states per year
@@ -106,7 +107,7 @@ export function ResultsPage() {
             <div key={yearResultsIndex} className="year-results-container">
               <h1>{result.year}</h1>
               <p className="mean-text">
-                Mean Grade:<span> {result.meanGrade}</span>
+                Mean Grade:<span> {result.mean}</span>
               </p>
 
               {/* Click to toggle specific year */}
@@ -211,6 +212,7 @@ export function ResultsPage() {
           ))}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
