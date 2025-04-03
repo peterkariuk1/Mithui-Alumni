@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { collection, getDocs, query, orderBy, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 import { Footer } from "../components/Footer.jsx";
 
 export function NewsEventsPage() {
@@ -12,30 +13,26 @@ export function NewsEventsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const imageLoadingStatus = useRef({});
-  
-  // Function to try different URL formats for Backblaze B2
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [deleting, setDeleting] = useState({});
+
   const getAlternativeUrls = (originalUrl) => {
     const urls = [];
-    
-    // 1. Original URL (encoded)
+
     const encodedUrl = encodeURI(originalUrl.trim());
     urls.push(encodedUrl);
-    
-    // 2. Try direct Backblaze download URL format with correct server (f005)
+
     if (encodedUrl.includes('backblazeb2.com')) {
       const filePath = encodedUrl.split('/file/mithui-images/')[1];
       if (filePath) {
-        // Standard Backblaze download URL - note the f005 server!
         urls.push(`https://f005.backblazeb2.com/file/mithui-images/${filePath}`);
       }
     }
-    
-    // 3. Try removing any URL parameters
+
     if (encodedUrl.includes('?')) {
       urls.push(encodedUrl.split('?')[0]);
     }
     
-    // 4. Try the S3-compatible URL format
     if (encodedUrl.includes('/news-events/')) {
       const fileName = encodedUrl.split('/').pop();
       if (fileName) {
@@ -43,32 +40,25 @@ export function NewsEventsPage() {
       }
     }
     
-    // Return unique URLs only
     return [...new Set(urls)];
   };
-  
-  // Function to normalize Backblaze URLs
+
   const normalizeBackblazeUrl = (url) => {
     try {
-      // First, make sure it's a valid URL string
+
       if (!url || typeof url !== 'string') return '';
-      
-      // Clean and encode the URL properly
+
       url = url.trim();
-      
-      // Correct server is f005, not f002
+
       if (url.includes('backblazeb2.com')) {
-        // If it's already using f005, leave it alone
         if (url.includes('f005.backblazeb2.com')) {
           return url;
         }
         
-        // If it's using the wrong server (f002), fix it
         if (url.includes('f002.backblazeb2.com')) {
           return url.replace('f002.backblazeb2.com', 'f005.backblazeb2.com');
         }
-        
-        // Extract the file path portion for other cases
+
         const parts = url.split('/file/mithui-images/');
         if (parts.length === 2) {
           return `https://f005.backblazeb2.com/file/mithui-images/${encodeURI(parts[1])}`;
@@ -85,7 +75,6 @@ export function NewsEventsPage() {
   useEffect(() => {
     const fetchNewsEvents = async () => {
       try {
-        // Create a query to fetch news/events ordered by timestamp (newest first)
         const q = query(
           collection(db, "newsEvents"),
           orderBy("timestamp", "desc")
@@ -103,11 +92,8 @@ export function NewsEventsPage() {
         querySnapshot.forEach(doc => {
           const data = doc.data();
           
-          // Validate and fix imageUrl before adding to the array
           if (data.imageUrl) {
-            // Fix the URL first
             const normalizedUrl = normalizeBackblazeUrl(data.imageUrl);
-            // Get alternative formats
             const urlsToTry = getAlternativeUrls(normalizedUrl);
             
             console.log(`Document ${doc.id} - URLs to try:`, urlsToTry);
@@ -116,12 +102,11 @@ export function NewsEventsPage() {
               id: doc.id,
               ...data,
               originalImageUrl: data.imageUrl,
-              imageUrl: normalizedUrl, // Use normalized URL as primary
-              alternativeUrls: urlsToTry.filter(url => url !== normalizedUrl), // Keep others as backup
+              imageUrl: normalizedUrl,
+              alternativeUrls: urlsToTry.filter(url => url !== normalizedUrl),
               timestamp: data.timestamp?.toDate() || new Date()
             });
-            
-            // Initialize loading status for this image
+
             imageLoadingStatus.current[doc.id] = {
               currentUrlIndex: 0,
               urls: [normalizedUrl, ...urlsToTry.filter(url => url !== normalizedUrl)],
@@ -143,8 +128,26 @@ export function NewsEventsPage() {
     
     fetchNewsEvents();
   }, []);
-  
-  // Handle image load success
+
+  useEffect(() => {
+    const checkAdminStatus = async (user) => {
+      if (user) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          setIsAdmin(userDoc.exists() && userDoc.data().role === 'admin');
+        } catch (error) {
+          console.error("Error checking admin status:", error);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false);
+      }
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, checkAdminStatus);
+    return () => unsubscribe();
+  }, []);
+
   const handleImageLoad = (item) => {
     console.log(`Image loaded successfully for item ${item.id}`);
     if (imageLoadingStatus.current[item.id]) {
@@ -152,24 +155,97 @@ export function NewsEventsPage() {
     }
   };
   
-  // Handle image load failure - try alternative URLs
   const handleImageError = (e, item) => {
     const status = imageLoadingStatus.current[item.id];
     console.error(`Error loading image for item ${item.id}: ${item.imageUrl}`);
     console.log(`Original URL was: ${item.originalImageUrl}`);
     
     if (status && !status.loaded && status.currentUrlIndex < status.urls.length - 1) {
-      // Try the next URL format
       status.currentUrlIndex++;
       const nextUrl = status.urls[status.currentUrlIndex];
       console.log(`Trying alternative URL for ${item.id}: ${nextUrl}`);
       e.target.src = nextUrl;
     } else {
-      // If all URLs failed or no alternatives, use placeholder
       e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
-      
-      // For debugging - link to test the image directly
+
       console.log(`Direct link to test in browser: ${item.originalImageUrl}`);
+    }
+  };
+
+  const handleDeleteNewsEvent = async (item) => {
+    if (!window.confirm('Are you sure you want to delete this news/event? This action cannot be undone.')) {
+      return;
+    }
+    
+    setDeleting(prev => ({ ...prev, [item.id]: true }));
+    
+    try {
+      await deleteDoc(doc(db, "newsEvents", item.id));
+      
+      let fileName;
+      
+      if (item.fileName) {
+        fileName = item.fileName;
+      } else if (item.imageUrl) {
+        if (item.imageUrl.includes('/file/mithui-images/')) {
+          const parts = item.imageUrl.split('/file/mithui-images/');
+          if (parts.length > 1) {
+            fileName = parts[1];
+          }
+        } else if (item.imageUrl.includes('/news-events/')) {
+          const match = item.imageUrl.match(/\/news-events\/([^?]+)/);
+          if (match && match[1]) {
+            fileName = `news-events/${match[1]}`;
+          } else {
+            const parts = item.imageUrl.split('/');
+            fileName = parts.length > 0 ? parts.pop() : null;
+          }
+        } else {
+          const parts = item.imageUrl.split('/');
+          fileName = parts.length > 0 ? parts.pop() : null;
+        }
+      }
+      
+      console.log("Extracted fileName for deletion:", fileName);
+      
+      if (fileName) {
+        const response = await fetch('http://localhost:3001/api/delete', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ fileName })
+        });
+
+        if (!response.ok) {
+          let errorMsg = `Server error: ${response.status}`;
+
+          const contentLength = response.headers?.get('content-length');
+          if (contentLength && parseInt(contentLength) > 0) {
+            try {
+              const errorData = await response.json();
+              if (errorData && errorData.message) {
+                errorMsg = errorData.message;
+              }
+            } catch (e) {
+              console.error(e,"Failed to parse error response");
+            }
+          }
+          
+          throw new Error(errorMsg);
+        }
+      } else {
+        console.log("No fileName could be extracted, skipping B2 deletion");
+      }
+      
+      setNewsEvents(prevItems => prevItems.filter(i => i.id !== item.id));
+      
+      console.log('News/Event successfully deleted');
+    } catch (error) {
+      console.error("Error deleting news/event:", error);
+      alert(`Error deleting news/event: ${error.message}`);
+    } finally {
+      setDeleting(prev => ({ ...prev, [item.id]: false }));
     }
   };
   
@@ -209,7 +285,32 @@ export function NewsEventsPage() {
         ) : (
           <div className="posters-grid">
             {newsEvents.map((item) => (
-              <div key={item.id} className="poster-item">
+              <div key={item.id} className="poster-item" style={{ position: 'relative' }}>
+                {isAdmin && (
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteNewsEvent(item)}
+                    disabled={deleting[item.id]}
+                    style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      background: 'rgba(255, 0, 0, 0.7)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '30px',
+                      height: '30px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      zIndex: 10
+                    }}
+                  >
+                    {deleting[item.id] ? "..." : "×"}
+                  </button>
+                )}
                 <div className="image-container">
                   <img 
                     src={item.imageUrl} 
@@ -220,10 +321,10 @@ export function NewsEventsPage() {
                       maxWidth: '100%', 
                       height: 'auto',
                       objectFit: 'contain',
-                      display: 'block', // Helps avoid layout issues
-                      margin: '0 auto' // Center the image
+                      display: 'block',
+                      margin: '0 auto'
                     }}
-                    loading="lazy" // Improve performance with lazy loading
+                    loading="lazy"
                   />
                 </div>
                 <div className="content-container">
