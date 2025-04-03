@@ -348,21 +348,22 @@
   gap: 10px;
 }
 
-.input-to-gallery-container button,.publish-container button{
-  background-color:rgb(2, 195, 2);
+.input-to-gallery-container button,
+.publish-container button {
+  background-color: rgb(2, 195, 2);
   color: var(--primary-color);
   padding: 4px 15px 4px 15px;
-  border:1px solid #000000;
+  border: 1px solid #000000;
   width: 100px;
   cursor: pointer;
   border-radius: 10px;
 }
-.publish-container{
+.publish-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.publish-container input{
+.publish-container input {
   padding: 18px 10px 18px 10px;
 }
 @media (max-width: 730px) {
@@ -715,6 +716,7 @@
   display: flex;
   gap: 10px;
   border-bottom: 1px solid #0000005d;
+  position: relative;
 }
 .poster-item img {
   width: 300px;
@@ -743,8 +745,38 @@
 }
 /* logout cta button */
 
-.logout-cta-button{
+.logout-cta-button {
   border: none;
   color: var(--sec-2-color);
   background-color: transparent;
+}
+
+/* Add these styles to your Pages.css file */
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.2s, transform 0.1s;
+  z-index: 10;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.delete-button:disabled {
+  background-color: rgba(128, 128, 128, 0.7);
+  cursor: not-allowed;
 }
