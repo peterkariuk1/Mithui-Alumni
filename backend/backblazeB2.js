@@ -7,7 +7,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(express.json());
+
+const corsOptions = {
+    origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174', 'https://mithui-alumni-association.vercel.app'],
+    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 const b2 = new B2({
     applicationKeyId: process.env.B2_APPLICATION_KEY_ID,
@@ -28,6 +36,24 @@ app.get('/api/check-auth', async (req, res) => {
             message: error.message,
             error: error.toString()
         });
+    }
+});
+
+app.get('/api/check-permissions', async (req, res) => {
+    try {
+        const authResponse = await b2.authorize();
+        console.log("Full auth response:", JSON.stringify(authResponse.data));
+
+        const capabilities = authResponse.data.allowed.capabilities || [];
+        const canDelete = capabilities.includes('deleteFiles');
+
+        res.json({
+            success: true,
+            canDelete,
+            capabilities
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
 });
 
@@ -73,6 +99,85 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
             success: false,
             message: error.message || 'Error uploading file to B2'
         });
+    }
+});
+
+app.delete('/api/delete', async (req, res) => {
+    console.log("Delete request received");
+
+    try {
+        const { fileName } = req.body;
+
+        if (!fileName) {
+            console.log("No fileName provided in request");
+            return res.status(400).json({ success: false, message: 'File name is required' });
+        }
+
+        console.log("Attempting to delete:", fileName);
+
+        try {
+            console.log("Authorizing with B2...");
+            await b2.authorize();
+            console.log("B2 authorization successful");
+        } catch (authError) {
+            console.error("B2 authorization failed:", authError);
+            return res.status(500).json({ success: false, message: `B2 authorization failed: ${authError.message}` });
+        }
+
+        const fileNameOnly = fileName.includes('/') ? fileName.split('/').pop() : fileName;
+        console.log("Extracted filename:", fileNameOnly);
+
+        try {
+            console.log("Listing files in bucket:", process.env.B2_BUCKET_ID);
+
+            const listFilesResponse = await b2.listFileNames({
+                bucketId: process.env.B2_BUCKET_ID,
+                maxFileCount: 100
+            });
+
+            console.log("List files response type:", typeof listFilesResponse);
+            console.log("List files response structure:",
+                JSON.stringify(Object.keys(listFilesResponse || {})));
+            console.log("List files data structure:",
+                JSON.stringify(Object.keys(listFilesResponse?.data || {})));
+
+            const files = listFilesResponse?.data?.files || [];
+            console.log(`Found ${files.length} files in bucket`);
+
+            const matchingFile = files.find(file =>
+                file.fileName === fileName || file.fileName.endsWith(fileNameOnly)
+            );
+
+            if (!matchingFile) {
+                console.log("No matching file found");
+                return res.status(404).json({
+                    success: true,
+                    message: 'File deleted from database, but not found in B2 storage'
+                });
+            }
+
+            console.log("Found matching file:", matchingFile.fileName);
+
+            await b2.deleteFileVersion({
+                fileId: matchingFile.fileId,
+                fileName: matchingFile.fileName
+            });
+
+            console.log(`File deleted: ${matchingFile.fileName}`);
+
+            return res.json({
+                success: true,
+                message: 'File deleted successfully from both database and storage',
+                deletedFile: matchingFile.fileName
+            });
+        } catch (b2Error) {
+            console.error("B2 operation error:", b2Error);
+            return res.status(500).json({ success: false, message: `B2 error: ${b2Error.message}` });
+        }
+
+    } catch (error) {
+        console.error("Unexpected error in delete endpoint:", error);
+        return res.status(500).json({ success: false, message: `Unexpected error: ${error.message}` });
     }
 });
 

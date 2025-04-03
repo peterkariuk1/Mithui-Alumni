@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import HomeIcon from "../images/homeicon.png";
 import clickIcon from "../images/hover.png";
 import RightIcon from "../images/righticon.svg";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { collection, getDocs, query, orderBy, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 import { Footer } from "../components/Footer.jsx";
 
 import jamesJuma from "../images/jamesjuma.jpg";
@@ -22,6 +23,8 @@ export function GalleryPage() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [deleting, setDeleting] = useState({});
 
   const normalizeBackblazeUrl = (url) => {
     try {
@@ -93,6 +96,128 @@ export function GalleryPage() {
     };
     fetchGalleryImages();
   }, []);
+
+  useEffect(() => {
+    const checkAdminStatus = async (user) => {
+      if (user) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          setIsAdmin(userDoc.exists() && userDoc.data().role === 'admin');
+        } catch (error) {
+          console.error("Error checking admin status:", error);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false);
+      }
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, checkAdminStatus);
+    return () => unsubscribe();
+  }, []);
+
+  const handleDeleteImage = async (item) => {
+    if (!window.confirm('Are you sure you want to delete this image? This action cannot be undone.')) {
+      return;
+    }
+    
+    setDeleting(prev => ({ ...prev, [item.id]: true }));
+    
+    try {
+      await deleteDoc(doc(db, "galleryImages", item.id));
+      
+      let fileName;
+
+      if (item.fileName) {
+        fileName = item.fileName;
+      } 
+      else if (item.imageUrl) {
+        if (item.imageUrl.includes('/file/mithui-images/')) {
+          const parts = item.imageUrl.split('/file/mithui-images/');
+          if (parts.length > 1) {
+            fileName = parts[1];
+          }
+        } else {
+          const parts = item.imageUrl.split('/');
+          fileName = parts.length > 0 ? parts.pop() : null;
+        }
+      }
+      
+      if (fileName) {
+        console.log("Deleting from B2:", fileName);
+        
+        try {
+          const response = await fetch('http://localhost:3001/api/delete', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fileName })
+          });
+
+          let errorMsg = `Server error: ${response.status}`;
+          
+          if (!response.ok) {
+            try {
+              const contentLength = response.headers?.get('content-length');
+              if (contentLength && parseInt(contentLength) > 0) {
+                try {
+                  const errorData = await response.json();
+                  if (errorData && errorData.message) {
+                    errorMsg += ` - ${errorData.message}`;
+                  }
+                } catch (e) {
+                  console.error("Failed to parse error response:", e);
+                  
+                  try {
+                    const textResponse = await response.text();
+                    if (textResponse) {
+                      errorMsg += ` - ${textResponse}`;
+                    }
+                  } catch (textError) {
+                    console.error("Failed to get response text:", textError);
+                  }
+                }
+              }
+              
+              throw new Error(errorMsg);
+            }
+            catch (parseError) {
+              console.error("Error parsing response:", parseError);
+              throw new Error(errorMsg);
+            }
+          }
+          
+          let data = { success: true };
+          try {
+            const contentLength = response.headers?.get('content-length');
+            if (contentLength && parseInt(contentLength) > 0) {
+              data = await response.json();
+            }
+          } catch (e) {
+            console.warn("Response not JSON, but operation likely succeeded:", e);
+          }
+
+          console.log("B2 delete response:", data);
+
+          setGalleryImages(prevImages => prevImages.filter(img => img.id !== item.id));
+          
+          console.log('Image successfully deleted from database and storage');
+        } catch (fetchError) {
+          console.error("Network error:", fetchError);
+          throw new Error(`Network error: ${fetchError.message || 'Unknown network error'}`);
+        }
+      } else {
+        console.warn("No valid filename found for B2 deletion");
+      }
+      
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      alert(`Error deleting image: ${error.message}`);
+    } finally {
+      setDeleting(prev => ({ ...prev, [item.id]: false }));
+    }
+  };
 
   const galleryItems = [
     {
@@ -208,7 +333,33 @@ export function GalleryPage() {
                 <div
                   key={item.id}
                   className="gallery-item"
+                  style={{ position: 'relative' }}
                 >
+                  {isAdmin && (
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDeleteImage(item)}
+                      disabled={deleting[item.id]}
+                      style={{
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        background: 'rgba(255, 0, 0, 0.7)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                        zIndex: 10
+                      }}
+                    >
+                      {deleting[item.id] ? "..." : "×"}
+                    </button>
+                  )}
                   <img
                     src={item.imageUrl}
                     alt={item.caption || "Gallery image"}
