@@ -1,12 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "backblazeB2.js",
   "type": "module",
   "scripts": {
     "start": "node backblazeB2.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon backblazeB2.js",
+    "test": "echos \"Error: no test specified\" && exit 1"
   },
   "author": "peterkariuk1",
   "license": "MIT",
