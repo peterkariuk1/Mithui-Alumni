@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Great+Vibes&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --primary-color: #fcfcf7;
   --secondary-color: #134172;
@@ -14,7 +13,7 @@ body {
 }
 /* Target the scrollbar */
 ::-webkit-scrollbar {
-  width: 15px; 
+  width: 15px;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,15 +21,13 @@ body {
   border-radius: 30px;
 }
 
-
 ::-webkit-scrollbar-thumb {
-  background: #0c335c; 
+  background: #0c335c;
   border-radius: 10px;
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #04111e; 
+  background: #04111e;
 }
 .landing-page {
   position: relative;
@@ -39,10 +36,11 @@ body {
   align-items: center;
   height: 70vh;
   max-width: 100vw;
-  background-image: url("../images/landing-page-photo.png");
+  background-image: url("../images/lland-new2.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  font-family: "Montserrat";
 }
 @keyframes headerLoad {
   0% {
@@ -80,11 +78,11 @@ header img {
   justify-content: space-between;
   width: 100%;
 }
-.left-header p{
+.left-header p {
   text-decoration: none;
   color: var(--primary-color);
 }
-.left-header p:hover{
+.left-header p:hover {
   border-bottom: 2px solid #fcaa32;
   transform: scale(1.05);
 }
@@ -93,7 +91,7 @@ header img {
 .small-screens {
   display: none;
 }
-.left-header p{
+.left-header p {
   color: var(--primary-color);
 }
 .left-header {
@@ -265,7 +263,7 @@ header img {
     color: #fcaa32;
     font-size: 13px;
   }
-  
+
   .menu-items {
     display: none;
     position: absolute;
@@ -275,12 +273,10 @@ header img {
     top: 60px;
     right: -50px;
     z-index: 3;
-    
   }
-  .menu-items.active{
-   display: block;
-   
- }
+  .menu-items.active {
+    display: block;
+  }
   .menu-items div {
     padding: 3px 95px 3px 8px;
   }
@@ -383,7 +379,7 @@ header img {
     padding: 3px 55px 3px 8px;
   }
 }
-@media (max-width: 360px){
+@media (max-width: 360px) {
   .menu-items {
     right: -60px;
   }
