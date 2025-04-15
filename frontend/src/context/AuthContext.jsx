@@ -7,12 +7,18 @@ const AuthContext = createContext();
 
 // Auth Provider Component
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // Tracks current user
+  const [loading, setLoading] = useState(true); // Tracks loading state
+  const [error, setError] = useState(null); // Tracks error state
 
   // Listen for auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false); // Stop loading when auth state is determined
+    }, (err) => {
+      setError(err.message);
+      setLoading(false); // Stop loading on error
     });
 
     return () => unsubscribe(); // Cleanup function
@@ -23,12 +29,15 @@ export function AuthProvider({ children }) {
     try {
       await signOut(auth);
     } catch (error) {
-      console.error("Logout Error:", error.message);
+      setError(error.message); // Handle logout errors
     }
   };
 
+  // If still loading, render nothing or a loading indicator-We will try and implement react toastify for a spinner....
+  // if (loading) return <div>Loading...</div>;
+
   return (
-    <AuthContext.Provider value={{ user, logout }}>
+    <AuthContext.Provider value={{ user, logout, error }}>
       {children}
     </AuthContext.Provider>
   );
