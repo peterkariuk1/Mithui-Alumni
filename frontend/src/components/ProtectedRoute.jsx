@@ -1,42 +1,29 @@
-import { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { getDoc, doc } from 'firebase/firestore';
-import { auth, db } from '../../firebaseConfig';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Import the AuthContext hook
+import { db } from "../../firebaseConfig";
+import { getDoc, doc } from "firebase/firestore";
 
 export default function ProtectedRoute({ children }) {
-  const [loading, setLoading] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useAuth(); // Use AuthContext to get user data
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          // Check if user is an admin by looking up their role in Firestore
-          const userDoc = await getDoc(doc(db, 'users', user.uid));
-          
-          if (userDoc.exists() && userDoc.data().role === 'admin') {
-            setIsAuthorized(true);
-          } else {
-            setIsAuthorized(false);
-          }
-        } catch (error) {
-          console.error('Error checking admin status:', error);
-          setIsAuthorized(false);
+    if (user) {
+      const checkUserStatus = async () => {
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+        if (!userDoc.exists() || !userDoc.data().paid) {
+          navigate("/register");
         }
-      } else {
-        // User is not logged in
-        setIsAuthorized(false);
-      }
-      setLoading(false);
-    });
+      };
 
-    return () => unsubscribe();
-  }, []);
+      checkUserStatus();
+    } else {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return isAuthorized ? children : <Navigate to="/login" />;
+  // Render children if user is valid
+  return user ? children : null;
 }

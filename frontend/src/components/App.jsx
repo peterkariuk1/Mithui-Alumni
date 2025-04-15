@@ -17,6 +17,7 @@ import ProtectedRoute from "../components/ProtectedRoute.jsx"; // Add this impor
 
 function App() {
   const location = useLocation();
+
   return (
     <AuthProvider>
       {location.pathname !== "/login" && location.pathname !== "/register" && (
@@ -34,14 +35,55 @@ function App() {
           }
         />
         <Route path="/about" element={<WelcomePage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/news" element={<NewsEventsPage />} />
-        <Route path="/events" element={<NewsEventsPage />} />
-        <Route path="/results" element={<ResultsPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
+        
+        {/* Protected Routes */}
+        <Route
+          path="/gallery"
+          element={
+            <ProtectedRoute>
+              <GalleryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/news"
+          element={
+            <ProtectedRoute>
+              <NewsEventsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <ProtectedRoute>
+              <NewsEventsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/results"
+          element={
+            <ProtectedRoute>
+              <ResultsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <ProtectedRoute>
+              <ProjectsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
+        
+        {/* Admin Protected Route */}
         <Route
           path="/admin"
           element={
@@ -51,6 +93,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </AuthProvider>
   );
 }
