@@ -48,6 +48,39 @@ export function ProjectsPage() {
         <div className="committees-container">
           <h1>Committees</h1>
           <div className="finance-committee">
+            <h2>Association Patron</h2>
+            <div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Mr. Odhiambo Aloyce</p>
+              </div>
+            </div>
+          </div>
+          <div className="finance-committee">
+            <h2>Board of Trustees</h2>
+            <p style={{ fontSize: "18px" }}>
+              This board provides oversight and guidance on the long-term
+              vision, governance, and accountability of the association. It is
+              composed of experienced individuals who serve as custodians of the
+              association’s mission and values.
+            </p>
+            <div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Dr. Mboya Geoffrey</p>
+              </div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Nelson Odhiambo</p>
+              </div>
+
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>George Bongo</p>
+              </div>
+            </div>
+          </div>
+          <div className="finance-committee">
             <h2>Finance Committee</h2>
             <p style={{ fontSize: "18px" }}>
               This four-member committee is responsible for exploring financial
@@ -57,20 +90,20 @@ export function ProjectsPage() {
             <div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Hellen Ondeyo</p>
+                <p>Walter Kelvin</p>
               </div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Walter Omollo</p>
+                <p>Anthony Ouma</p>
               </div>
 
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Evans Asewe</p>
+                <p>John Kennedy</p>
               </div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>James Bongo</p>
+                <p>Lency Osoro</p>
               </div>
             </div>
           </div>
@@ -84,19 +117,45 @@ export function ProjectsPage() {
             <div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Fredrick Oyoo</p>
+                <p>Seth Ouko</p>
               </div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Emmanuel Wende</p>
+                <p>Lucy Ooko</p>
               </div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Joshua Ager</p>
+                <p>Moses Oloo</p>
               </div>
               <div className="member-container">
                 <img src={memberIcon} />
-                <p>Boniface Amuna</p>
+                <p>Evans Ouno</p>
+              </div>
+            </div>
+          </div>
+          <div className="finance-committee">
+            <h2>Education Committee</h2>
+            <p style={{ fontSize: "18px" }}>
+              This committee is dedicated to promoting educational initiatives
+              that support the academic growth of members and the wider school
+              community.
+            </p>
+            <div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Bernard Ghai</p>
+              </div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Jameson Oriwo</p>
+              </div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Angela Wanga</p>
+              </div>
+              <div className="member-container">
+                <img src={memberIcon} />
+                <p>Jemima Akoth</p>
               </div>
             </div>
           </div>
