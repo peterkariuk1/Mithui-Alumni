@@ -13,7 +13,7 @@ import { LoginPage } from "../pages/LoginPage.jsx";
 import { RegisterPage } from "../pages/RegisterPage.jsx";
 import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
-import ProtectedRoute from "../components/ProtectedRoute.jsx"; // Add this import
+import ProtectedRoute from "../components/ProtectedRoute.jsx";
 
 function App() {
   const location = useLocation();
@@ -23,6 +23,7 @@ function App() {
       {location.pathname !== "/login" && location.pathname !== "/register" && (
         <Header />
       )}
+
       <Routes>
         <Route
           path="/"
@@ -35,55 +36,16 @@ function App() {
           }
         />
         <Route path="/about" element={<WelcomePage />} />
-        
-        {/* Protected Routes */}
-        <Route
-          path="/gallery"
-          element={
-            <ProtectedRoute>
-              <GalleryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/news"
-          element={
-            <ProtectedRoute>
-              <NewsEventsPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/events"
-          element={
-            <ProtectedRoute>
-              <NewsEventsPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/results"
-          element={
-            <ProtectedRoute>
-              <ResultsPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <ProtectedRoute>
-              <ProjectsPage />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Public Routes */}
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/news" element={<NewsEventsPage />} />
+        <Route path="/events" element={<NewsEventsPage />} />
+        <Route path="/results" element={<ResultsPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
         
-        {/* Admin Protected Route */}
+        {/* Only admin route is protected */}
         <Route
           path="/admin"
           element={
@@ -93,7 +55,10 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
+
+      {location.pathname !== "/login" && location.pathname !== "/register" && (
+        <Footer />
+      )}
     </AuthProvider>
   );
 }

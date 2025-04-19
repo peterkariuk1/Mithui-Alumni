@@ -10,6 +10,7 @@ import fs from 'fs';
 dotenv.config();
 
 const app = express();
+// middlewares
 app.use(express.json());
 
 // Initialize Firebase Admin
@@ -176,7 +177,7 @@ async function sendSTKPush(phoneNumber) {
         PartyB: process.env.BUSINESS_SHORTCODE,
         PhoneNumber: phoneNumber,
         CallBackURL: process.env.CALLBACK_URL,
-        AccountReference: "MithuiApp",
+        AccountReference: "AppMithuiAlumni",
         TransactionDesc: "Registration Fee"
     };
 
