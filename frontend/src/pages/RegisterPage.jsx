@@ -9,7 +9,7 @@ import axios from "axios"; // Import Axios
 export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState(""); // Store phone number
+  const [phoneNumber, setPhone] = useState(""); // Store phone number
   const [showModal, setShowModal] = useState(false); // Show modal for payment
   const [isSubmitting, setIsSubmitting] = useState(false); // Submit button state
   const [error, setError] = useState(""); // Store error message
@@ -17,9 +17,9 @@ export function RegisterPage() {
   // Function to initiate payment
   const initiatePayment = async () => {
     try {
-      const response = await axios.post("https://yourbackend.com/api/pay", {
-        phoneNumber: phone,
-        amount: 200
+      const response = await axios.post("http://localhost:3001/api/stk-push", {
+        phoneNumber: phoneNumber,
+        amount: 1
       });
       return response.data.success;
     } catch (error) {
@@ -33,7 +33,7 @@ export function RegisterPage() {
     e.preventDefault();
 
     // Step 1: Validate inputs
-    if (!email || !password || !phone) {
+    if (!email || !password || !phoneNumber) {
       setError("All fields are required!");
       return;
     }
@@ -55,7 +55,7 @@ export function RegisterPage() {
 
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
-        phone: phone,
+        phoneNumber: phoneNumber,
         role: "user",
         createdAt: new Date(),
         uid: user.uid
@@ -95,7 +95,7 @@ export function RegisterPage() {
             <p>Phone Number (M-PESA)</p>
             <input
               type="text"
-              value={phone}
+              value={phoneNumber}
               onChange={(e) => setPhone(e.target.value)}
               required
             />
@@ -117,7 +117,7 @@ export function RegisterPage() {
 
           <button
             className="login-button"
-            type="button"
+            type="submit"
             onClick={() => setShowModal(true)}
           >
             <p> Sign Up</p>

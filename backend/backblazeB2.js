@@ -172,7 +172,7 @@ async function sendSTKPush(phoneNumber) {
         Password: password,
         Timestamp: timestamp,
         TransactionType: "CustomerPayBillOnline",
-        Amount: 200,
+        Amount: 1,
         PartyA: phoneNumber,
         PartyB: process.env.BUSINESS_SHORTCODE,
         PhoneNumber: phoneNumber,
@@ -180,6 +180,8 @@ async function sendSTKPush(phoneNumber) {
         AccountReference: "AppMithuiAlumni",
         TransactionDesc: "Registration Fee"
     };
+
+    console.log("STK Push Payload: ", requestData);
 
     const response = await axios.post(
         "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
@@ -193,16 +195,33 @@ async function sendSTKPush(phoneNumber) {
 // STK Push Endpoint
 app.post('/api/stk-push', async (req, res) => {
     const { phoneNumber } = req.body;
+
+    if (!phoneNumber || typeof phoneNumber !== 'string' || !phoneNumber.startsWith('254')) {
+        return res.status(400).json({
+            success: false,
+            message: 'Invalid phone number format. Use 2547XXXXXXXX format.'
+        });
+    }
+
     try {
         const result = await sendSTKPush(phoneNumber);
         res.json({ success: true, response: result });
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        console.error("STK Push Error:", error.response?.data || error.message);
+
+        const statusCode = error.response?.status || 500;
+        const message = error.response?.data?.errorMessage || "STK Push failed. Please try again.";
+
+        res.status(statusCode).json({
+            success: false,
+            message
+        });
     }
 });
 
+
 // M-PESA Callback Handler
-app.post('/payment_callback', async (req, res) => {
+app.post('/api/stk-callback', async (req, res) => {
     const callbackData = req.body;
 
     const success = callbackData?.Body?.stkCallback?.ResultCode === 0;
