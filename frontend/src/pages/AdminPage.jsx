@@ -137,7 +137,7 @@ export function AdminPage() {
       formData.append('file', newsEventImage);
       
       // Upload to your B2 upload endpoint
-      const response = await fetch('http://localhost:3001/api/upload', {
+      const response = await fetch('https://mithui-backend-production.up.railway.app/api/upload', {
         method: 'POST',
         body: formData
       });
@@ -203,7 +203,7 @@ export function AdminPage() {
       formData.append('file', galleryImage);
       
       // Upload to your B2 upload endpoint
-      const response = await fetch('http://localhost:3001/api/upload', {
+      const response = await fetch('https://mithui-backend-production.up.railway.app/api/upload', {
         method: 'POST',
         body: formData
       });
