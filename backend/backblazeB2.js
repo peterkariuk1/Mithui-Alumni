@@ -247,3 +247,5 @@ app.post('/api/stk-callback', async (req, res) => {
 // Start Server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`B2 Upload server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Mithui B2 Upload server running on port ${PORT}`));
