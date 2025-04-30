@@ -1,2 +1,4 @@
 /node_modules
 .env
+# Ignore Firebase service account credentials
+# backend/firebase-service-account.json

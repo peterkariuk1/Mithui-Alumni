@@ -3,9 +3,9 @@ import cors from 'cors';
 import multer from 'multer';
 import B2 from 'backblaze-b2';
 import dotenv from 'dotenv';
-import axios from 'axios';
-import admin from 'firebase-admin';
-import fs from 'fs';
+// import axios from 'axios';
+// import admin from 'firebase-admin';
+// import fs from 'fs';
 
 dotenv.config();
 
@@ -13,14 +13,14 @@ const app = express();
 // middlewares
 app.use(express.json());
 
-// Initialize Firebase Admin
-const serviceAccount = JSON.parse(fs.readFileSync('firebase-service-account.json', 'utf8'));
+// // Initialize Firebase Admin
+// const serviceAccount = JSON.parse(fs.readFileSync('firebase-service-account.json', 'utf8'));
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
-const db = admin.firestore();
+// const db = admin.firestore();
 
 // CORS Configuration
 const corsOptions = {
@@ -148,104 +148,105 @@ app.delete('/api/delete', async (req, res) => {
     }
 });
 
-// M-PESA OAuth Token
-async function getOAuthToken() {
-    const { CONSUMER_KEY, CONSUMER_SECRET } = process.env;
-    const response = await axios.get(
-        "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
-        { auth: { username: CONSUMER_KEY, password: CONSUMER_SECRET } }
-    );
-    return response.data.access_token;
-}
+/* ------------------------ DARAJA (M-PESA) SECTION COMMENTED OUT ------------------------ */
 
-// M-PESA STK Push
-async function sendSTKPush(phoneNumber) {
-    const token = await getOAuthToken();
+// // M-PESA OAuth Token
+// async function getOAuthToken() {
+//     const { CONSUMER_KEY, CONSUMER_SECRET } = process.env;
+//     const response = await axios.get(
+//         "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+//         { auth: { username: CONSUMER_KEY, password: CONSUMER_SECRET } }
+//     );
+//     return response.data.access_token;
+// }
 
-    const timestamp = new Date().toISOString().replace(/[-T:.Z]/g, '').slice(0, 14);
-    const password = Buffer.from(
-        process.env.BUSINESS_SHORTCODE + process.env.PASSKEY + timestamp
-    ).toString('base64');
+// // M-PESA STK Push
+// async function sendSTKPush(phoneNumber) {
+//     const token = await getOAuthToken();
 
-    const requestData = {
-        BusinessShortCode: process.env.BUSINESS_SHORTCODE,
-        Password: password,
-        Timestamp: timestamp,
-        TransactionType: "CustomerPayBillOnline",
-        Amount: 1,
-        PartyA: phoneNumber,
-        PartyB: process.env.BUSINESS_SHORTCODE,
-        PhoneNumber: phoneNumber,
-        CallBackURL: process.env.CALLBACK_URL,
-        AccountReference: "AppMithuiAlumni",
-        TransactionDesc: "Registration Fee"
-    };
+//     const timestamp = new Date().toISOString().replace(/[-T:.Z]/g, '').slice(0, 14);
+//     const password = Buffer.from(
+//         process.env.BUSINESS_SHORTCODE + process.env.PASSKEY + timestamp
+//     ).toString('base64');
 
-    console.log("STK Push Payload: ", requestData);
+//     const requestData = {
+//         BusinessShortCode: process.env.BUSINESS_SHORTCODE,
+//         Password: password,
+//         Timestamp: timestamp,
+//         TransactionType: "CustomerPayBillOnline",
+//         Amount: 1,
+//         PartyA: phoneNumber,
+//         PartyB: process.env.BUSINESS_SHORTCODE,
+//         PhoneNumber: phoneNumber,
+//         CallBackURL: process.env.CALLBACK_URL,
+//         AccountReference: "AppMithuiAlumni",
+//         TransactionDesc: "Registration Fee"
+//     };
 
-    const response = await axios.post(
-        "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
-        requestData,
-        { headers: { Authorization: `Bearer ${token}` } }
-    );
+//     console.log("STK Push Payload: ", requestData);
 
-    return response.data;
-}
+//     const response = await axios.post(
+//         "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+//         requestData,
+//         { headers: { Authorization: `Bearer ${token}` } }
+//     );
 
-// STK Push Endpoint
-app.post('/api/stk-push', async (req, res) => {
-    const { phoneNumber } = req.body;
+//     return response.data;
+// }
 
-    if (!phoneNumber || typeof phoneNumber !== 'string' || !phoneNumber.startsWith('254')) {
-        return res.status(400).json({
-            success: false,
-            message: 'Invalid phone number format. Use 2547XXXXXXXX format.'
-        });
-    }
+// // STK Push Endpoint
+// app.post('/api/stk-push', async (req, res) => {
+//     const { phoneNumber } = req.body;
 
-    try {
-        const result = await sendSTKPush(phoneNumber);
-        res.json({ success: true, response: result });
-    } catch (error) {
-        console.error("STK Push Error:", error.response?.data || error.message);
+//     if (!phoneNumber || typeof phoneNumber !== 'string' || !phoneNumber.startsWith('254')) {
+//         return res.status(400).json({
+//             success: false,
+//             message: 'Invalid phone number format. Use 2547XXXXXXXX format.'
+//         });
+//     }
 
-        const statusCode = error.response?.status || 500;
-        const message = error.response?.data?.errorMessage || "STK Push failed. Please try again.";
+//     try {
+//         const result = await sendSTKPush(phoneNumber);
+//         res.json({ success: true, response: result });
+//     } catch (error) {
+//         console.error("STK Push Error:", error.response?.data || error.message);
 
-        res.status(statusCode).json({
-            success: false,
-            message
-        });
-    }
-});
+//         const statusCode = error.response?.status || 500;
+//         const message = error.response?.data?.errorMessage || "STK Push failed. Please try again.";
 
+//         res.status(statusCode).json({
+//             success: false,
+//             message
+//         });
+//     }
+// });
 
-// M-PESA Callback Handler
-app.post('/api/stk-callback', async (req, res) => {
-    const callbackData = req.body;
+// // M-PESA Callback Handler
+// app.post('/api/stk-callback', async (req, res) => {
+//     const callbackData = req.body;
 
-    const success = callbackData?.Body?.stkCallback?.ResultCode === 0;
+//     const success = callbackData?.Body?.stkCallback?.ResultCode === 0;
 
-    const docData = {
-        status: success ? "Success" : "Failed",
-        timestamp: new Date().toISOString(),
-        checkoutRequestID: callbackData?.Body?.stkCallback?.CheckoutRequestID || null,
-        phoneNumber: callbackData?.Body?.stkCallback?.CallbackMetadata?.Item?.find(item => item.Name === 'PhoneNumber')?.Value || null,
-        rawData: callbackData
-    };
+//     const docData = {
+//         status: success ? "Success" : "Failed",
+//         timestamp: new Date().toISOString(),
+//         checkoutRequestID: callbackData?.Body?.stkCallback?.CheckoutRequestID || null,
+//         phoneNumber: callbackData?.Body?.stkCallback?.CallbackMetadata?.Item?.find(item => item.Name === 'PhoneNumber')?.Value || null,
+//         rawData: callbackData
+//     };
 
-    try {
-        await db.collection("mpesa_payments").add(docData);
-        console.log(success ? "Payment Successful!" : "Payment Failed!", docData.checkoutRequestID);
-    } catch (error) {
-        console.error("Error saving to Firestore:", error);
-    }
+//     try {
+//         await db.collection("mpesa_payments").add(docData);
+//         console.log(success ? "Payment Successful!" : "Payment Failed!", docData.checkoutRequestID);
+//     } catch (error) {
+//         console.error("Error saving to Firestore:", error);
+//     }
 
-    res.sendStatus(200);
-});
+//     res.sendStatus(200);
+// });
+
+/* -------------------------------------------------------------------------------------- */
 
 // Start Server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-app.listen(PORT, () => console.log(`B2 Upload server running on port ${PORT}`));
 app.listen(PORT, () => console.log(`Mithui B2 Upload server running on port ${PORT}`));

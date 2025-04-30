@@ -532,7 +532,7 @@
 
 /* STYLE FOR THEMODAL IN THE SIGN UP PAGE */
 /* Modal Overlay */
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -543,10 +543,10 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
-}
+} */
 
 /* Modal Content */
-.modal-content {
+/* .modal-content { */
   /* visibility: hidden;
   opacity: 0;
   position: absolute;
@@ -559,7 +559,7 @@
   justify-content: center;
   background: rgba(255, 255, 255, 0.7);
   transition: all .4s */
-  position: absolute;
+  /* position: absolute;
   top: 0;
   bottom: 0;
   align-items: center;
@@ -572,10 +572,10 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   text-align: center;
   
-}
+} */
 
 /* Modal Header */
-.modal-header {
+/* .modal-header {
   padding: 15px;
   font-size: 18px;
   font-weight: bold;
@@ -588,26 +588,26 @@
 .modal-header .close {
   font-size: 20px;
   cursor: pointer;
-}
+} */
 
 /* Modal Body */
-.modal-body {
+/* .modal-body {
   padding: 20px;
   font-size: 14px;
-}
+} */
 
 /* Modal Footer */
-.modal-footer {
+/* .modal-footer {
   display: flex;
   justify-content: flex-end;
   padding: 10px 20px;
   gap: 10px;
   background-color: #f1f1f1;
   border-top: 1px solid #ddd;
-}
+} */
 
 /* Modal Buttons */
-.modal-pay-btn,
+/* .modal-pay-btn,
 .modal-cancel-btn {
   padding: 10px 20px;
   font-size: 1em;
@@ -615,35 +615,35 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
+} */
 
 /* Pay Button */
-.modal-pay-btn {
+/* .modal-pay-btn {
   background-color: #28a745;
   color: white;
   margin-right: 10px;
-}
+} */
 
-.modal-pay-btn:hover {
+/* .modal-pay-btn:hover {
   background-color: #218838;
-}
+} */
 
 /* Cancel Button */
-.modal-cancel-btn {
+/* .modal-cancel-btn {
   background-color: #dc3545;
   color: white;
   margin-left: 10px;
-}
+} */
 
-.modal-cancel-btn:hover {
+/* .modal-cancel-btn:hover {
   background-color: #c82333;
-}
+} */
 
 /* Loader on Pay Button */
-.modal-pay-btn:disabled {
+/* .modal-pay-btn:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
-}
+} */
 
 
 /* STYLES FOR THE PROJECTS PAGE */

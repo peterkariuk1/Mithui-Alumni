@@ -4,58 +4,56 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
-import axios from "axios"; // Import Axios
+// import axios from "axios"; // Removed because payment is not needed
 
 export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phoneNumber, setPhone] = useState(""); // Store phone number
-  const [showModal, setShowModal] = useState(false); // Show modal for payment
-  const [isSubmitting, setIsSubmitting] = useState(false); // Submit button state
-  const [error, setError] = useState(""); // Store error message
+  // const [phoneNumber, setPhone] = useState(""); // Phone number removed
+  // const [showModal, setShowModal] = useState(false); // Modal removed
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  // Function to initiate payment
-  const initiatePayment = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/api/stk-push", {
-        phoneNumber: phoneNumber,
-        amount: 1
-      });
-      return response.data.success;
-    } catch (error) {
-      console.error("Payment error:", error);
-      return false;
-    }
-  };
+  // Commented out the payment function
+  // const initiatePayment = async () => {
+  //   try {
+  //     const response = await axios.post("http://localhost:3002/api/stk-push", {
+  //       phoneNumber: phoneNumber,
+  //       amount: 1
+  //     });
+  //     return response.data.success;
+  //   } catch (error) {
+  //     console.error("Payment error:", error);
+  //     return false;
+  //   }
+  // };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Step 1: Validate inputs
-    if (!email || !password || !phoneNumber) {
-      setError("All fields are required!");
-      return;
-    }
-    setError(""); // Reset error if validation passes
-
-    // Step 2: Initiate Payment
-    setIsSubmitting(true); // Disable button while submitting
-    const paymentSuccessful = await initiatePayment();
-    if (!paymentSuccessful) {
-      alert("Payment failed! Please try again.");
-      setIsSubmitting(false);
+    if (!email || !password) {
+      setError("Email and password are required!");
       return;
     }
 
-    // Step 3: Register User after Payment
+    setError("");
+    setIsSubmitting(true);
+
+    // Payment part removed
+    // const paymentSuccessful = await initiatePayment();
+    // if (!paymentSuccessful) {
+    //   alert("Payment failed! Please try again.");
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
-        phoneNumber: phoneNumber,
+        // phoneNumber: phoneNumber, // Removed
         role: "user",
         createdAt: new Date(),
         uid: user.uid
@@ -65,11 +63,11 @@ export function RegisterPage() {
     } catch (error) {
       alert(error.message);
     } finally {
-      setIsSubmitting(false); // Re-enable button after submission
+      setIsSubmitting(false);
       setEmail("");
       setPassword("");
-      setPhone("");
-      setShowModal(false); // Close modal after submission
+      // setPhone(""); // Removed
+      // setShowModal(false); // Removed
     }
   };
 
@@ -79,7 +77,7 @@ export function RegisterPage() {
         <div className="left-section">
           <h1>Mithui Alumni Association</h1>
           <h2>Welcome!</h2>
-          <p className="login-instruction">Pay and create your account</p>
+          <p className="login-instruction">Create your account</p>
 
           <div className="username-container">
             <p>Email</p>
@@ -91,15 +89,19 @@ export function RegisterPage() {
             />
           </div>
 
+          {/* Phone input removed */}
+          {/* 
           <div className="phone-container">
             <p>Phone Number (M-PESA)</p>
             <input
               type="text"
               value={phoneNumber}
               onChange={(e) => setPhone(e.target.value)}
+              placeholder="Use this format +254 xxx xxx xxx"
               required
             />
           </div>
+          */}
 
           <div className="password-container">
             <p>Password</p>
@@ -112,15 +114,10 @@ export function RegisterPage() {
             />
           </div>
 
-          {/* Display error message if there is one */}
           {error && <p className="error-message">{error}</p>}
 
-          <button
-            className="login-button"
-            type="submit"
-            onClick={() => setShowModal(true)}
-          >
-            <p> Sign Up</p>
+          <button className="login-button" type="submit">
+            <p>{isSubmitting ? "Processing..." : "Sign Up"}</p>
           </button>
 
           <p className="sign-up-instructions">
@@ -136,7 +133,8 @@ export function RegisterPage() {
         <img src={SVGAnimation} alt="SVG Animation" />
       </div>
 
-      {/* Modal for Payment */}
+      {/* Modal removed */}
+      {/* 
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -160,6 +158,7 @@ export function RegisterPage() {
           </div>
         </div>
       )}
+      */}
     </section>
   );
 }
