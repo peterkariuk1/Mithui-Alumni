@@ -6,7 +6,6 @@ import "../styles/Pages.css";
 import { auth, db } from "../../firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { setDoc, doc, collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
-import { Footer } from "../components/Footer.jsx";
 import loaderAnimation from "../images/loadervideo.webm";
 
 export function AdminPage() {
@@ -137,7 +136,7 @@ export function AdminPage() {
       formData.append('file', newsEventImage);
       
       // Upload to your B2 upload endpoint
-      const response = await fetch('http://localhost:3001/api/upload', {
+      const response = await fetch('https://mithui-backend-production.up.railway.app/', {
         method: 'POST',
         body: formData
       });
@@ -202,8 +201,8 @@ export function AdminPage() {
       const formData = new FormData();
       formData.append('file', galleryImage);
       
-      // Upload to your B2 upload endpoint
-      const response = await fetch('http://localhost:3001/api/upload', {
+      // Upload to your B2 uplofad endpoint
+      const response = await fetch('https://mithui-backend-production.up.railway.app/', {
         method: 'POST',
         body: formData
       });
@@ -465,7 +464,6 @@ export function AdminPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

@@ -6,7 +6,6 @@ import RightIcon from "../images/righticon.svg";
 import { collection, getDocs, query, orderBy, deleteDoc, doc, getDoc } from "firebase/firestore";
 import { db, auth } from "../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { Footer } from "../components/Footer.jsx";
 
 export function NewsEventsPage() {
   const [newsEvents, setNewsEvents] = useState([]);
@@ -341,7 +340,7 @@ export function NewsEventsPage() {
           </div>
         )}
       </section>
-      <Footer />
+
     </div>
   );
 }

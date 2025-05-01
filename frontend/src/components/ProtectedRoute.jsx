@@ -6,24 +6,35 @@ import { getDoc, doc } from "firebase/firestore";
 
 export default function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-  const { user } = useAuth(); // Use AuthContext to get user data
+  const { user } = useAuth(); // Get current authenticated user
 
   useEffect(() => {
     if (user) {
-      const checkUserStatus = async () => {
+      const checkUserRole = async () => {
         const userRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userRef);
-        if (!userDoc.exists() || !userDoc.data().paid) {
-          navigate("/register");
+
+        if (!userDoc.exists()) {
+          navigate("/unauthorized");
+          return;
         }
+
+        const userData = userDoc.data();
+
+
+        if (userData.role === "admin") {
+
+          return;
+        }
+
+        navigate("/unauthorized");
       };
 
-      checkUserStatus();
+      checkUserRole();
     } else {
       navigate("/login");
     }
   }, [user, navigate]);
 
-  // Render children if user is valid
   return user ? children : null;
 }

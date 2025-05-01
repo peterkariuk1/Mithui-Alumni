@@ -4,8 +4,7 @@ import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import memberIcon from "../images/committeeicon.jpg";
 import projectsImage from "../images/pageprojects.jpg";
-import waterTankImage from "../images/watertank.jpg";
-import { Footer } from "../components/Footer.jsx";
+import waterTankImage from "../images/tankmithui.jpg";
 export function ProjectsPage() {
   return (
     <div className="about-page">
@@ -212,7 +211,6 @@ export function ProjectsPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

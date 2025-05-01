@@ -26,11 +26,13 @@ export function Footer() {
           <Link to="https://www.facebook.com/share/g/1A2DuT4CsM/">
             <img src={fbLogo} />
           </Link>
-          <Link to="https://wa.me/0790416657" target="_blank">
+          <Link to="https://chat.whatsapp.com/Jz2Vqs0rDsA0I6f8xw1GnD " target="_blank">
             <img src={wappLogo} />
           </Link>
           <img src={xLogo} />
+          <Link to='https://www.linkedin.com/in/mithui-highschool-047b53312/'>
           <img src={lndLogo} />
+          </Link>
           <img className="hand-cursor" src={handCursor} />
         </div>
       </div>

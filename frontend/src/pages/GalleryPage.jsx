@@ -393,7 +393,6 @@ export function GalleryPage() {
           </div>
         )}
       </section>
-      <Footer />
     </div>
   );
 }
