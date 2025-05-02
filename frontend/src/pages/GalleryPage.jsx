@@ -15,7 +15,6 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { Footer } from "../components/Footer.jsx";
 
 import jamesJuma from "../images/jamesjuma.jpg";
 import lucyOoko from "../images/lucyouko.jpg";
@@ -158,7 +157,7 @@ export function GalleryPage() {
         console.log("Deleting from B2:", fileName);
 
         try {
-          const response = await fetch("http://localhost:3001/api/delete", {
+          const response = await fetch("https://mithui-backend-production.up.railway.app/api/delete", {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
