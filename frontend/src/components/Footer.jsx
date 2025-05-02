@@ -3,7 +3,6 @@ import "../styles/Footer.css";
 import mithuiLogo from "../images/header-logo.png";
 import fbLogo from "../images/facebook.png";
 import wappLogo from "../images/whatsapp.png";
-import xLogo from "../images/x.png";
 import lndLogo from "../images/linkedin.png";
 import handCursor from "../images/hand-cursor.png";
 import mailLogo from "../images/gmail.png";
@@ -26,12 +25,14 @@ export function Footer() {
           <Link to="https://www.facebook.com/share/g/1A2DuT4CsM/">
             <img src={fbLogo} />
           </Link>
-          <Link to="https://chat.whatsapp.com/Jz2Vqs0rDsA0I6f8xw1GnD " target="_blank">
+          <Link
+            to="https://chat.whatsapp.com/Jz2Vqs0rDsA0I6f8xw1GnD "
+            target="_blank"
+          >
             <img src={wappLogo} />
           </Link>
-          <img src={xLogo} />
-          <Link to='https://www.linkedin.com/in/mithui-highschool-047b53312/'>
-          <img src={lndLogo} />
+          <Link to="https://www.linkedin.com/in/mithui-highschool-047b53312/">
+            <img src={lndLogo} />
           </Link>
           <img className="hand-cursor" src={handCursor} />
         </div>
@@ -48,7 +49,8 @@ export function Footer() {
           <p>Upcoming events</p>
         </Link>
         <Link
-          to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5" target="_blank"
+          to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5"
+          target="_blank"
           style={{ color: "#fcfcf7" }}
         >
           <p>Find Us</p>
@@ -68,16 +70,24 @@ export function Footer() {
       </div>
       <div className="right">
         <h1>Contact Information</h1>
-        <div>
-          <img src={mailLogo} />
-          <p>mithuihighschool@gmail.com</p>
-        </div>
-        <a style={{textDecoration:'none', color:'#fcfcf7'}} href="tel:+254790416657">
-        <div>
-          <img src={phoneLogo} />
-          <p>0790416657</p>
-        </div>
-          </a>
+        <a
+          style={{ textDecoration: "none", color: "#fcfcf7" }}
+          href="mailto:mithuihighschool@gmail.com?subject=Welcome%20to%20our%20community%21&body=We%20truly%20value%20your%20feedback%2C%20insights%2C%20and%20thoughts%20-%20feel%20free%20to%20share%20them%20with%20us."
+        >
+          <div>
+            <img src={mailLogo} />
+            <p>mithuihighschool@gmail.com</p>
+          </div>
+        </a>
+        <a
+          style={{ textDecoration: "none", color: "#fcfcf7" }}
+          href="tel:+254790416657"
+        >
+          <div>
+            <img src={phoneLogo} />
+            <p>0790416657</p>
+          </div>
+        </a>
       </div>
       <Link to="/admin">
         <p className="rights-text">© 2025 Mithui Alumni.</p>

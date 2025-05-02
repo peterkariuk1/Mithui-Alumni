@@ -42,7 +42,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  font-family: "Montserrat";
+  font-family:"Source Sans 3", serif;
 }
 @keyframes headerLoad {
   0% {
