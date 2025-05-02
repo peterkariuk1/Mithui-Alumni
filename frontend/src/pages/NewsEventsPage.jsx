@@ -208,7 +208,7 @@ export function NewsEventsPage() {
       console.log("Extracted fileName for deletion:", fileName);
       
       if (fileName) {
-        const response = await fetch('http://localhost:3001/api/delete', {
+        const response = await fetch('https://mithui-backend-production.up.railway.app/api/delete', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
