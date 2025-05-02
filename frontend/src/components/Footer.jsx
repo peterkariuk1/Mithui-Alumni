@@ -72,7 +72,7 @@ export function Footer() {
         <h1>Contact Information</h1>
         <a
           style={{ textDecoration: "none", color: "#fcfcf7" }}
-          href="mailto:mithuihighschool@gmail.com?subject=Welcome%20to%20our%20community%21&body=We%20truly%20value%20your%20feedback%2C%20insights%2C%20and%20thoughts%20-%20feel%20free%20to%20share%20them%20with%20us."
+          href="mailto:mithuihighschool@gmail.com?subject=Welcome%20to%20the%20Mithui%20Alumni%20Community%21&body=Share%20your%20feedback%2C%20insights%2C%20and%20thoughts%20here:"
         >
           <div>
             <img src={mailLogo} />
