@@ -8,9 +8,9 @@ const Maintenance = () => {
       <p className="notfound-message">
         This site is currently under maintenance. Thank you for your patience{" "}
       </p>
-      {/* <Link to="/" className="notfound-button">
+      <Link to="/" className="notfound-button">
         Go Home
-      </Link> */}
+      </Link>
     </div>
   );
 };

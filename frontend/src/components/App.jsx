@@ -14,20 +14,20 @@ import { RegisterPage } from "../pages/RegisterPage.jsx";
 import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
-import Maintenance from "../pages/Maintenance.jsx";
+// import Maintenance from "../pages/Maintenance.jsx";
 
 function App() {
   const location = useLocation();
 
   return (
     <AuthProvider>
-      {/* {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" && (
+      {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" && (
         <Header />
-      )} */}
+      )}
 
       <Routes>
-        <Route path="/" element={<Maintenance />} />
-        {/* <Route
+        {/* <Route path="/" element={<Maintenance />} /> */}
+        <Route
           path="/"
           element={
             <>
@@ -45,22 +45,22 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/welcome" element={<WelcomePage />} /> */}
+        <Route path="/welcome" element={<WelcomePage />} />
         
         {/* Only admin route is protected */}
-        {/* <Route
+        <Route
           path="/admin"
           element={
             <ProtectedRoute>
               <AdminPage />
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
-{/* 
+
       {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" &&(
         <Footer />
-      )} */}
+      )}
     </AuthProvider>
   );
 }
