@@ -12,6 +12,7 @@ export function Landing() {
           A core foundation group for all the ones who sat and learned the
           meaning and purpose of education. <span>Strive to excel</span>
         </p>
+        <div className="registration-banner"></div>
       </section>
       <div className="purpose-container">
         <div className="vision-container">

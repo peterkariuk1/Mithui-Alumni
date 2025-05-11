@@ -1,5 +1,6 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
 
 :root {
   --primary-color: #fcfcf7;
@@ -9,7 +10,7 @@
 }
 body {
   margin: 0;
-  font-family:"Source Sans 3", serif;
+  font-family: "Source Sans 3", serif;
   background-color: var(--primary-color);
   /* padding-bottom: 30px; */
 }
@@ -42,7 +43,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  font-family:"Source Sans 3", serif;
+  font-family: "Source Sans 3", serif;
 }
 @keyframes headerLoad {
   0% {
@@ -52,6 +53,47 @@ body {
   100% {
     transform: translate3d(0, 0, 0);
     opacity: 1;
+  }
+}
+.registration-banner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -130px;
+  height: 200px;
+  border-radius: 12px;
+  background-image: url("../images/regisboard.png"); /* Replace with your image */
+  background-size: contain;
+  background-repeat: repeat-x;
+  background-position: center;
+  animation: bounce 4s ease-in-out 0s infinite;
+  animation-delay: 8s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-100px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-60px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
@@ -157,7 +199,8 @@ header img {
   justify-content: space-around;
   align-items: start;
   /* background-color: black; */
-  margin-top: 20px;
+  margin-top: 80px;
+  padding-top: 50px;
   margin-bottom: 40px;
   animation: 5.2s ease 1 normal opacityPurposeLoad;
 }
@@ -216,6 +259,12 @@ header img {
 
 /* Media queries for rensponsiveness on the landing page */
 
+@media (max-width: 910px) {
+  .purpose-container {
+    /* background-color: black; */
+    margin-top: 50px;
+  }
+}
 @media (max-width: 820px) {
   .large-screens {
     display: none;
@@ -332,6 +381,10 @@ header img {
   .menu-items div {
     padding: 3px 75px 3px 8px;
   }
+  .purpose-container {
+    /* background-color: black; */
+    margin-top: 30px;
+  }
 }
 @media (max-width: 590px) {
   /* header img {
@@ -339,6 +392,14 @@ header img {
     margin-top: 3px;
     margin-left: -27px;
   } */
+  .registration-banner {
+    bottom: -60px;
+
+  }
+  .purpose-container {
+    /* background-color: black; */
+    margin-top: 10px;
+  }
   .left-header .cta-button {
     padding: 1px 13px 1px 13px;
     font-size: 13px;
