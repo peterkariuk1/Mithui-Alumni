@@ -7,7 +7,6 @@ import RightIcon from "../images/righticon.svg";
 import loaderAnimation from "../images/loadervideo.webm";
 import StudentsIcon from "../images/studentsIcon.png";
 import viewMoreIcon from "../images/viewmore.png";
-import resultsImage from "../images/pageresults.jpg";
 import { db } from "../../firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 

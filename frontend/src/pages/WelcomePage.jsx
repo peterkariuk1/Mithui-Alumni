@@ -4,8 +4,6 @@ import "../styles/Pages.css";
 import "../styles/Footer.css";
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
-import welcPageImage from "../images/welcomepage.jpg";
-import abtPageImage from "../images/aboutpage.png";
 export function WelcomePage() {
   return (
     <div className="about-page">

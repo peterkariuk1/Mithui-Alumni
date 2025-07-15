@@ -3,7 +3,6 @@ import "../styles/Pages.css";
 import HomeIcon from "../images/homeicon.png";
 import RightIcon from "../images/righticon.svg";
 import memberIcon from "../images/committeeicon.jpg";
-import projectsImage from "../images/pageprojects.jpg";
 import waterTankImage from "../images/tankmithui.jpg";
 export function ProjectsPage() {
   return (
