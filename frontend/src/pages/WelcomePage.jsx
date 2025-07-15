@@ -28,14 +28,13 @@ export function WelcomePage() {
       </div>
       <section className="bottom">
         <div className="content-container">
-          <img className="content-image" src={welcPageImage} />
           <p>
             Welcome to the Mithui Mixed Secondary School Alumni Association! At
             the heart of humanity lies an unyielding drive to improve and
             advance our lives, often through the wonders of technology and
             collective innovation. <br />
             <p>
-              This unending pursuit of progress is not an individual journey—it
+              This unending pursuit of progress is not an individual journey it
               is a shared endeavor, requiring collaboration, mutual support, and
               the exchange of ideas to create extraordinary success stories.
               After all, no one person holds infinite knowledge or solutions.
@@ -47,7 +46,7 @@ export function WelcomePage() {
             individual accomplishments to a collective effort aimed at making a
             lasting impact.
             <p>
-              Change begins at home—by strengthening our local communities and
+              Change begins at home by strengthening our local communities and
               creating meaningful opportunities. From there, we can extend our
               influence to the sub-county, county, and eventually, the world.
               This transformative journey is not achieved in a single day,
@@ -98,8 +97,8 @@ export function WelcomePage() {
         </div>
         <RegisterTab />
         <h1>Discover our story, values, and the vision that unites us.</h1>
+
         <div className="content--container">
-          <img className="content--image" src={abtPageImage} />
           <p>
             Mithui Mixed Secondary School is a public sub-county school located
             in Rachuonyo South sub-county, Homabay County. Situated
@@ -108,7 +107,10 @@ export function WelcomePage() {
             <br />
             <div>
               Find Us
-              <Link to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5" target="_blank">
+              <Link
+                to="https://maps.app.goo.gl/BbLjpb2BYCeLW1Yw5"
+                target="_blank"
+              >
                 <p>Link to the map</p>
               </Link>
             </div>

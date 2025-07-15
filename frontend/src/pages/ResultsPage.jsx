@@ -92,7 +92,6 @@ export function ResultsPage() {
       </div>
       <section className="bottom-results">
         <div className="results-content-container">
-          <img className="results-image" src={resultsImage} />
           <p className="upper-text-results">
             A testament to the dedication and excellence of our alumni, by
             reflecting on these results, we not only celebrate our shared legacy

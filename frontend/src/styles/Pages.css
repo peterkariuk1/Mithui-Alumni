@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
 :root {
   --primary-color: #fcfcf7;
   --secondary-color: #134172;
@@ -30,7 +31,7 @@
   color: var(--secondary-color);
   font-size: 50px;
   font-weight: 500;
-  width: 60vw;
+  width: 80vw;
   padding-top: 80px;
   animation: forwards 2.2s ease-in-out popIn;
 }
@@ -65,13 +66,13 @@
 
 } */
 .content-image {
-  float: left;
+  /* float: left; */
   width: 500px;
   margin: 0px 30px 15px 0px;
 }
 .bottom p {
-  font-size: 19px;
-  text-align: justify;
+  font-size: 16px;
+  font-family: "Questrial";
 }
 
 .purpose-welcome-container {
@@ -145,8 +146,8 @@
 }
 .upper-text-results {
   color: var(--secondary-color);
-  font-size: 30px;
-  text-align: center;
+  font-size: 16px;
+  font-family: "Questrial";
 }
 .year-results-container {
   background-color: rgba(234, 234, 234, 0.422);
@@ -230,8 +231,7 @@
   }
   .upper-text-results {
     color: var(--secondary-color);
-    font-size: 18px;
-    text-align: center;
+    font-size: 16px;
   }
 }
 @media (max-width: 540px) {
@@ -241,8 +241,7 @@
   }
   .upper-text-results {
     color: var(--secondary-color);
-    font-size: 15px;
-    text-align: start;
+    font-size: 16px;
   }
 }
 
@@ -284,8 +283,8 @@
 }
 
 .content--container p {
-  font-size: 19px;
-  text-align: left;
+  font-size: 16px;
+  font-family: "Questrial";
 }
 
 .content--container p div {
@@ -481,6 +480,17 @@
   justify-content: center;
   align-items: center;
 }
+.content-image-grid img {
+  width: 98%;
+  border-radius: 10% 5% 8% 5%/10% 5% 8% 5%;
+}
+.content-image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  width: 90vw;
+}
 @keyframes scaleUp {
   0%,
   80%,
@@ -547,7 +557,7 @@
 
 /* Modal Content */
 /* .modal-content { */
-  /* visibility: hidden;
+/* visibility: hidden;
   opacity: 0;
   position: absolute;
   top: 0;
@@ -559,7 +569,7 @@
   justify-content: center;
   background: rgba(255, 255, 255, 0.7);
   transition: all .4s */
-  /* position: absolute;
+/* position: absolute;
   top: 0;
   bottom: 0;
   align-items: center;
@@ -645,7 +655,6 @@
   cursor: not-allowed;
 } */
 
-
 /* STYLES FOR THE PROJECTS PAGE */
 
 .projects-content-container {
@@ -660,12 +669,15 @@
 }
 .upper-text-projects {
   color: var(--secondary-color);
-  font-size: 30px;
-  text-align: center;
+  font-size: 19px;
+  font-family: "Questrial";
 }
 .finance-committee img {
   width: 40px;
   height: 40px;
+}
+.finance-committee p {
+  font-family: "Questrial";
 }
 .finance-committee:nth-child(1) {
   display: flex;
@@ -680,6 +692,10 @@
 .alumni-projects-container h1 {
   text-align: center;
   color: var(--secondary-color);
+}
+.alumni-projects-container p {
+  font-size: 16px;
+  font-family: "Questrial";
 }
 .alumni-initiatives-container h2 {
   margin: 0;
@@ -698,8 +714,8 @@
   }
   .upper-text-projects {
     color: var(--secondary-color);
-    font-size: 18px;
-    text-align: center;
+    font-size: 16px;
+    font-family: "Questrial";
   }
 }
 @media (max-width: 630px) {
@@ -712,8 +728,8 @@
     height: 230px;
   }
   .upper-text-projects {
-    font-size: 18px;
-    text-align: start;
+    font-size: 16px;
+    font-family: "Questrial";
   }
 }
 

@@ -27,7 +27,6 @@ export function ProjectsPage() {
       </div>
       <section className="bottom-projects">
         <div className="projects-content-container">
-          <img className="projects-image" src={projectsImage} />
           <p className="upper-text-projects">
             Progress is driven by action. Our projects reflect the dedication
             and collaborative spirit of our alumni, students, and the wider
@@ -57,7 +56,7 @@ export function ProjectsPage() {
           </div>
           <div className="finance-committee">
             <h2>Board of Trustees</h2>
-            <p style={{ fontSize: "18px" }}>
+            <p style={{ fontSize: "16px" }}>
               This board provides oversight and guidance on the long-term
               vision, governance, and accountability of the association. It is
               composed of experienced individuals who serve as custodians of the
@@ -81,7 +80,7 @@ export function ProjectsPage() {
           </div>
           <div className="finance-committee">
             <h2>Finance Committee</h2>
-            <p style={{ fontSize: "18px" }}>
+            <p style={{ fontSize: "16px" }}>
               This four-member committee is responsible for exploring financial
               sources for the association. It includes three nominated members
               and a trustee.
@@ -108,7 +107,7 @@ export function ProjectsPage() {
           </div>
           <div className="finance-committee">
             <h2>Investment Committee</h2>
-            <p style={{ fontSize: "18px" }}>
+            <p style={{ fontSize: "16px" }}>
               This committee focuses on strategic investments that benefit the
               association and the school community. Like the Finance Committee,
               it consists of three nominated members and a trustee.
@@ -134,7 +133,7 @@ export function ProjectsPage() {
           </div>
           <div className="finance-committee">
             <h2>Education Committee</h2>
-            <p style={{ fontSize: "18px" }}>
+            <p style={{ fontSize: "16px" }}>
               This committee is dedicated to promoting educational initiatives
               that support the academic growth of members and the wider school
               community.
