@@ -157,7 +157,7 @@ export function GalleryPage() {
         console.log("Deleting from B2:", fileName);
 
         try {
-          const response = await fetch("https://mithui-backend-production.up.railway.app/api/delete", {
+          const response = await fetch("https://mithui-backend.onrender.com/api/delete", {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
