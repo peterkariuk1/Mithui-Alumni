@@ -22,7 +22,7 @@ function App() {
   return (
     <AuthProvider>
       {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" && (
-        <Header />
+      {/*<Header />*/}
       )}
 
       <Routes>
@@ -59,7 +59,7 @@ function App() {
       </Routes>
 
       {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" &&(
-        <Footer />
+      {/*<Footer />*/}
       )}
     </AuthProvider>
   );
