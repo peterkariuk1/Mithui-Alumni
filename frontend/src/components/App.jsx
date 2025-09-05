@@ -14,7 +14,7 @@ import { RegisterPage } from "../pages/RegisterPage.jsx";
 import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
-// import Maintenance from "../pages/Maintenance.jsx";
+import Maintenance from "../pages/Maintenance.jsx";
 
 function App() {
   const location = useLocation();
@@ -26,8 +26,8 @@ function App() {
       )}
 
       <Routes>
-        {/* <Route path="/" element={<Maintenance />} /> */}
-        <Route
+         <Route path="/" element={<Maintenance />} /> 
+        {/* <Route
           path="/"
           element={
             <>
@@ -36,7 +36,7 @@ function App() {
               <WelcomePage />
             </>
           }
-        />
+        /> 
         <Route path="/about" element={<WelcomePage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/news" element={<NewsEventsPage />} />
@@ -47,7 +47,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
         
-        {/* Only admin route is protected */}
+        
         <Route
           path="/admin"
           element={
@@ -55,7 +55,7 @@ function App() {
               <AdminPage />
             </ProtectedRoute>
           }
-        />
+        />*/}
       </Routes>
 
       {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" &&(
