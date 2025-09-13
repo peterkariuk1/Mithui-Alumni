@@ -21,13 +21,13 @@ function App() {
 
   return (
     <AuthProvider>
-     {/* {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" && (
+      {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" && (
       <Header />
-      )}*/}
+      )}
 
       <Routes>
          <Route path="/" element={<Maintenance />} /> 
-        {/* <Route
+         <Route
           path="/"
           element={
             <>
@@ -58,9 +58,9 @@ function App() {
         />*/}
       </Routes>
 
-       {/*{location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" &&(
+      {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" &&(
      <Footer />
-      )}*/}
+      )}
     </AuthProvider>
   );
 }
