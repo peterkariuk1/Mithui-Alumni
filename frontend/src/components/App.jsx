@@ -55,7 +55,7 @@ function App() {
               <AdminPage />
             </ProtectedRoute>
           }
-        />*/}
+        />
       </Routes>
 
       {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "*" &&(
