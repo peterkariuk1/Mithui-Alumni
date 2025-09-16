@@ -1,4 +1,5 @@
 import "../styles/notFound.css";
+import { Link } from "react-router-dom";
 
 const Maintenance = () => {
   return (

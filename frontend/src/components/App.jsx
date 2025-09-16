@@ -14,7 +14,7 @@ import { RegisterPage } from "../pages/RegisterPage.jsx";
 import { WelcomePage } from "../pages/WelcomePage.jsx";
 import { AdminPage } from "../pages/AdminPage.jsx";
 import ProtectedRoute from "../components/ProtectedRoute.jsx";
-import Maintenance from "../pages/Maintenance.jsx";
+// import Maintenance from "../pages/Maintenance.jsx";
 
 function App() {
   const location = useLocation();
@@ -26,7 +26,7 @@ function App() {
       )}
 
       <Routes>
-         <Route path="/" element={<Maintenance />} /> 
+         {/* <Route path="/" element={<Maintenance />} />  */}
          <Route
           path="/"
           element={
